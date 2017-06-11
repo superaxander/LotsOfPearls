@@ -38,7 +38,7 @@ class LOP() : IMod {
     val RIDEABLE_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.rideable_pearl")
     val TELEPORTATION_PARTICLE_RESOURCE = RockBottomAPI.createRes(this, "particles.teleportation")
 
-    override fun getVersion() = "0.2"
+    override fun getVersion() = "0.3"
 
     override fun getId() = "lop"
 

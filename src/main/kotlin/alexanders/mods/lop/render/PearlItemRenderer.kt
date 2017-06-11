@@ -6,11 +6,12 @@ import de.ellpeck.rockbottom.api.assets.IAssetManager
 import de.ellpeck.rockbottom.api.item.Item
 import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.render.item.DefaultItemRenderer
+import de.ellpeck.rockbottom.api.util.reg.IResourceName
 import org.newdawn.slick.Color
 import org.newdawn.slick.Graphics
 
 
-class PearlItemRenderer(bouncy: Boolean) : DefaultItemRenderer(if (bouncy) LOP.instance.BOUNCY_PEARL_RESOURCE else LOP.instance.PEARL_RESOURCE) {
+class PearlItemRenderer(resourceName: IResourceName) : DefaultItemRenderer(resourceName) {
     override fun render(game: IGameInstance, manager: IAssetManager, g: Graphics, item: Item, instance: ItemInstance, x: Float, y: Float, scale: Float, filter: Color) {
         super.render(game, manager, g, item, instance, x, y, scale, filter)
         if (instance.amount == -1)

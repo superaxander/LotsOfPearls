@@ -1,4 +1,6 @@
 lop/item.pearl=Teleportation Pearl
 lop/item.bouncy_pearl=Bouncy Teleportation Pearl
+lop/item.rideable_pearl=Rideable Teleportation Pearl
 lop/desc.pearl=A pearl that teleports you. What else did you expect?
 lop/desc.bouncy_pearl=A teleporation pearl that bounces. What else did you expect?
+lop/desc.rideable_pearl=Rideable Teleportation Pearl

@@ -13,7 +13,7 @@ import org.newdawn.slick.geom.Vector2f
 import java.util.*
 
 
-class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.BOUNCY_PEARL_RESOURCE))) {
+class RideablePearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.RIDEABLE_PEARL_RESOURCE))) {
     init {
         if (this.additionalData == null) {
             this.additionalData = DataSet()
@@ -36,32 +36,28 @@ class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
     constructor(world2: IWorld) : this(world = world2)
 
     override fun update(game: IGameInstance) {
-        applyMotion()
+        super.update(game)
+        val uuid = this.additionalData.getUniqueId("playerUUID")
         game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * TeleportationParticle.randomSignedDouble(), maxLife = 10))
-        move(motionX, motionY)
+        if (uuid != null) {
+            world.getEntity(uuid)?.setPos(x, y + .8f)
+            world.getEntity(uuid)?.fallAmount =0
+            if (RockBottomAPI.getNet().isServer) {
+                RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + .8f, true))
+            }
+        }
         if (collidedVert || collidedHor) {
-            if (this.additionalData.getInt("bounces") >= 3) {
-                val uuid = this.additionalData.getUniqueId("playerUUID")
-                //println("$x , $y")
-                if (uuid != null) {
-                    val e = world.getEntity(uuid)
-                    if (e != null) {
-                        e.setPos(this.x, this.y + 1.2f)
-                        if (RockBottomAPI.getNet().isServer) {
-                            RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + 1.2f))
-                            for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
-                        }
+            //println("$x , $y")
+            if (uuid != null) {
+                val e = world.getEntity(uuid)
+                if (e != null) {
+                    e.setPos(this.x, this.y + 1.2f)
+                    if (RockBottomAPI.getNet().isServer) {
+                        RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + 1.2f))
                     }
+                    for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
+                    this.kill()
                 }
-                this.kill()
-            } else {
-                if (!this.additionalData.hasKey("bounces"))
-                    this.additionalData.addInt("bounces", 1)
-                this.additionalData.addInt("bounces", this.additionalData.getInt("bounces") + 1)
-                if (this.collidedHor)
-                    this.motionX = -(this.motionX * .85f)
-                if (this.collidedVert)
-                    this.motionY = -(this.motionY * .85f)
             }
         }
     }

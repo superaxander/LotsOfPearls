@@ -1,7 +1,7 @@
 package alexanders.mods.lop.entity
 
 import alexanders.mods.lop.LOP
-import alexanders.mods.lop.net.EntityPostionUpdatePacket
+import alexanders.mods.lop.net.EntityPositionUpdatePacket
 import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.RockBottomAPI
@@ -46,7 +46,7 @@ class PearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f 
                 if (e != null) {
                     e.setPos(this.x, this.y + 1.2f)
                     if (RockBottomAPI.getNet().isServer) {
-                        RockBottomAPI.getNet().sendToAllPlayers(world, EntityPostionUpdatePacket(uuid, x, y + 1.2f))
+                        RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + 1.2f))
                     }
                     for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
 

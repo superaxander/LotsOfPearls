@@ -14,7 +14,7 @@ import org.newdawn.slick.geom.Vector2f
 
 
 class PearlItem() : ItemBasic(LOP.instance.PEARL_RESOURCE), Useable {
-    val renderer = PearlItemRenderer(false)
+    val renderer = PearlItemRenderer(LOP.instance.PEARL_RESOURCE)
     override fun use(itemInstance: ItemInstance, mouseDirection: Vector2f, player: AbstractEntityPlayer) {
         if (itemInstance.additionalData == null) {
             itemInstance.additionalData = DataSet()
@@ -25,7 +25,7 @@ class PearlItem() : ItemBasic(LOP.instance.PEARL_RESOURCE), Useable {
             val pearlEntity = PearlEntity(player.world, player.uniqueId, mouseDirection)
             player.world.addEntity(pearlEntity)
             itemInstance.additionalData.addInt("cooldown", 60)
-            if(itemInstance.removeAmount(1).amount <= 0)
+            if (itemInstance.removeAmount(1).amount <= 0)
                 player.inv[player.selectedSlot] = null
             player.sendPacket(CooldownUpdatePacket(60))
         }

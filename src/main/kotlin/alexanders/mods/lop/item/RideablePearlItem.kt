@@ -1,7 +1,8 @@
 package alexanders.mods.lop.item
 
 import alexanders.mods.lop.LOP
-import alexanders.mods.lop.entity.BouncyPearlEntity
+import alexanders.mods.lop.entity.PearlEntity
+import alexanders.mods.lop.entity.RideablePearlEntity
 import alexanders.mods.lop.net.CooldownUpdatePacket
 import alexanders.mods.lop.render.PearlItemRenderer
 import de.ellpeck.rockbottom.api.assets.IAssetManager
@@ -13,8 +14,8 @@ import de.ellpeck.rockbottom.api.render.item.IItemRenderer
 import org.newdawn.slick.geom.Vector2f
 
 
-class BouncyPearlItem() : ItemBasic(LOP.instance.BOUNCY_PEARL_RESOURCE), Useable {
-    val renderer = PearlItemRenderer(LOP.instance.BOUNCY_PEARL_RESOURCE)
+class RideablePearlItem : ItemBasic(LOP.instance.RIDEABLE_PEARL_RESOURCE), Useable {
+    val renderer = PearlItemRenderer(LOP.instance.RIDEABLE_PEARL_RESOURCE)
     override fun use(itemInstance: ItemInstance, mouseDirection: Vector2f, player: AbstractEntityPlayer) {
         if (itemInstance.additionalData == null) {
             itemInstance.additionalData = DataSet()
@@ -22,7 +23,7 @@ class BouncyPearlItem() : ItemBasic(LOP.instance.BOUNCY_PEARL_RESOURCE), Useable
         }
         val cooldown = itemInstance.additionalData.getInt("cooldown")
         if (cooldown <= 0) {
-            val pearlEntity = BouncyPearlEntity(player.world, player.uniqueId, mouseDirection)
+            val pearlEntity = RideablePearlEntity(player.world, player.uniqueId, mouseDirection)
             player.world.addEntity(pearlEntity)
             itemInstance.additionalData.addInt("cooldown", 60)
             if (itemInstance.removeAmount(1).amount <= 0)
@@ -33,7 +34,7 @@ class BouncyPearlItem() : ItemBasic(LOP.instance.BOUNCY_PEARL_RESOURCE), Useable
 
     override fun describeItem(manager: IAssetManager, instance: ItemInstance, desc: MutableList<String>, isAdvanced: Boolean) {
         super.describeItem(manager, instance, desc, isAdvanced)
-        desc.add(manager.localize(LOP.instance.BOUNCY_PEARL_DESC_RESOURCE))
+        desc.add(manager.localize(LOP.instance.RIDEABLE_PEARL_DESC_RESOURCE))
     }
 
     override fun getRenderer(): IItemRenderer<*> {

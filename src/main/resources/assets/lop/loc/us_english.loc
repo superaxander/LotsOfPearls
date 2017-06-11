@@ -1,4 +1,4 @@
 lop/item.pearl=Teleportation Pearl
 lop/item.bouncy_pearl=Bouncy Teleportation Pearl
-lop/descPearl=A pearl that teleports you. What else did you expect?
-lop/descBouncyPearl=A teleporation pearl that bounces. What else did you expect?
+lop/desc.pearl=A pearl that teleports you. What else did you expect?
+lop/desc.bouncy_pearl=A teleporation pearl that bounces. What else did you expect?

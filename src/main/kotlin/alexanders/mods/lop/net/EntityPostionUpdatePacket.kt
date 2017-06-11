@@ -1,5 +1,6 @@
 package alexanders.mods.lop.net
 
+import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.net.packet.IPacket
 import io.netty.buffer.ByteBuf
@@ -18,8 +19,12 @@ class EntityPostionUpdatePacket(var uuid: UUID?, var x: Double, var y: Double) :
     }
 
     override fun handle(game: IGameInstance, channelHandlerContext: ChannelHandlerContext) {
-        if(uuid != null) {
-            game.world.getEntity(uuid).setPos(x, y)
+        game.scheduleAction {
+            if (uuid != null) {
+                game.world.getEntity(uuid).setPos(x, y)
+                for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
+            }
+            return@scheduleAction true
         }
     }
 

@@ -1,4 +1,5 @@
 tex.items.pearl=/item/pearl.png
 tex.items.bouncy_pearl=/item/bouncy_pearl.png
 tex.cooldown=/item/cooldown.png
+tex.particles.teleportation=/particle/teleportation.png
 loc.us_english=/loc/us_english.loc

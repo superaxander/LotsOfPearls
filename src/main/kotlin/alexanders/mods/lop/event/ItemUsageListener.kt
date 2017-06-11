@@ -20,7 +20,7 @@ class ItemUsageListener : MouseListener, IEventListener<EntityTickEvent> {
                 val cooldown = entity.inv[entity.selectedSlot].additionalData.getInt("cooldown")
                 if (cooldown > 0) {
                     entity.inv[entity.selectedSlot].additionalData.addInt("cooldown", cooldown - 1)
-                    println("set cooldown to ${cooldown -1}")
+                    //println("set cooldown to ${cooldown -1}")
                     if(RockBottomAPI.getNet().isServer)
                         entity.sendPacket(CooldownUpdatePacket(cooldown - 1))
                 }
@@ -44,7 +44,7 @@ class ItemUsageListener : MouseListener, IEventListener<EntityTickEvent> {
         if (RockBottomAPI.getGame().guiManager.gui == null && button == 1) {
             val net = RockBottomAPI.getNet()
             val game = RockBottomAPI.getGame()
-            println("${net.isClient} ${net.isServer}")
+            //println("${net.isClient} ${net.isServer}")
 
             //if (net.isClient || !net.isActive) {
                 // We are on a client so we have access to input

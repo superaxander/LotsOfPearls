@@ -16,15 +16,18 @@ class CooldownUpdatePacket(var cooldown: Int) : IPacket {
     }
 
     override fun handle(game: IGameInstance, channelHandlerContext: ChannelHandlerContext) {
-        val slot = game.player.inv[game.player.selectedSlot]
-        println("received cooldown update")
-        if (slot != null && slot.additionalData == null && slot.item is Useable) {
-            slot.additionalData = DataSet()
-            slot.additionalData.addInt("cooldown", cooldown)
-        } else if (slot != null && slot.additionalData != null && slot.additionalData.hasKey("cooldown")) {
-            slot.additionalData.addInt("cooldown", cooldown)
-            if (cooldown == 60 && slot.removeAmount(1).amount <= 0)
-                game.player.inv[game.player.selectedSlot] = null
+        game.scheduleAction {
+            val slot = game.player.inv[game.player.selectedSlot]
+            //println("received cooldown update")
+            if (slot != null && slot.additionalData == null && slot.item is Useable) {
+                slot.additionalData = DataSet()
+                slot.additionalData.addInt("cooldown", cooldown)
+            } else if (slot != null && slot.additionalData != null && slot.additionalData.hasKey("cooldown")) {
+                slot.additionalData.addInt("cooldown", cooldown)
+                if (cooldown == 60 && slot.removeAmount(1).amount <= 0)
+                    game.player.inv[game.player.selectedSlot] = null
+            }
+            return@scheduleAction true
         }
     }
 

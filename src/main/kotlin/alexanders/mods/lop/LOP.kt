@@ -30,8 +30,9 @@ class LOP() : IMod {
     val PEARL_RESOURCE = RockBottomAPI.createRes(this, "pearl")
     val BOUNCY_PEARL_RESOURCE = RockBottomAPI.createRes(this, "bouncy_pearl")
     val COOLDOWN_RESOURCE = RockBottomAPI.createRes(this, "cooldown")
-    val PEARL_DESC = RockBottomAPI.createRes(this, "descPearl")
-    val BOUNCY_PEARL_DESC = RockBottomAPI.createRes(this, "descBouncyPearl")
+    val PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.pearl")
+    val BOUNCY_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.bouncy_pearl")
+    val TELEPORTATION_PARTICLE_RESOURCE = RockBottomAPI.createRes(this, "particles.teleportation")
 
     override fun getVersion() = "0.1"
 

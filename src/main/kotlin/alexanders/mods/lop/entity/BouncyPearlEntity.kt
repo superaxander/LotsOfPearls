@@ -2,6 +2,7 @@ package alexanders.mods.lop.entity
 
 import alexanders.mods.lop.LOP
 import alexanders.mods.lop.net.EntityPostionUpdatePacket
+import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.data.set.DataSet
@@ -29,27 +30,30 @@ class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
             val ePlayer = world.getEntity(this.additionalData.getUniqueId("playerUUID"))
             this.setPos(ePlayer.x, ePlayer.y)
         }
-        println("$x , $y")
+        //println("$x , $y")
     }
 
     constructor(world2: IWorld) : this(world = world2)
 
-    override fun update(game: IGameInstance?) {
+    override fun update(game: IGameInstance) {
         applyMotion()
+        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX/2*TeleportationParticle.randomSignedDouble(), maxLife = 10))
         move(motionX, motionY)
         if (collidedVert || collidedHor) {
             if(this.additionalData.getInt("bounces") >= 3) {
                 val uuid = this.additionalData.getUniqueId("playerUUID")
-                println("$x , $y")
+                //println("$x , $y")
                 if (uuid != null) {
                     val e = world.getEntity(uuid)
                     if (e != null) {
                         e.setPos(this.x, this.y + 1.2f)
-                        if (RockBottomAPI.getNet().isServer)
+                        if (RockBottomAPI.getNet().isServer) {
                             RockBottomAPI.getNet().sendToAllPlayers(world, EntityPostionUpdatePacket(uuid, x, y + 1.2f))
+                            for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
+                        }
                     }
                 }
-                this.dead = true
+                this.kill()
             }else {
                 if(!this.additionalData.hasKey("bounces"))
                     this.additionalData.addInt("bounces", 1)

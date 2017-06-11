@@ -33,7 +33,7 @@ class PearlItem() : ItemBasic(LOP.instance.PEARL_RESOURCE), Useable {
 
     override fun describeItem(manager: IAssetManager, instance: ItemInstance, desc: MutableList<String>, isAdvanced: Boolean) {
         super.describeItem(manager, instance, desc, isAdvanced)
-        desc.add(manager.localize(LOP.instance.PEARL_DESC))
+        desc.add(manager.localize(LOP.instance.PEARL_DESC_RESOURCE))
     }
 
     override fun getRenderer(): IItemRenderer<*> {

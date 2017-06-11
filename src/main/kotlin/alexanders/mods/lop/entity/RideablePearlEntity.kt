@@ -2,6 +2,7 @@ package alexanders.mods.lop.entity
 
 import alexanders.mods.lop.LOP
 import alexanders.mods.lop.net.EntityPositionUpdatePacket
+import alexanders.mods.lop.render.PearlParticle
 import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.RockBottomAPI
@@ -38,7 +39,7 @@ class RideablePearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
     override fun update(game: IGameInstance) {
         super.update(game)
         val uuid = this.additionalData.getUniqueId("playerUUID")
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * TeleportationParticle.randomSignedDouble(), maxLife = 10))
+        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (uuid != null) {
             world.getEntity(uuid)?.setPos(x, y + .8f)
             world.getEntity(uuid)?.fallAmount =0

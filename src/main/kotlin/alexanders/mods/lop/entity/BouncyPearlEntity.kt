@@ -2,6 +2,7 @@ package alexanders.mods.lop.entity
 
 import alexanders.mods.lop.LOP
 import alexanders.mods.lop.net.EntityPositionUpdatePacket
+import alexanders.mods.lop.render.PearlParticle
 import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.RockBottomAPI
@@ -37,7 +38,7 @@ class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
 
     override fun update(game: IGameInstance) {
         applyMotion()
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * TeleportationParticle.randomSignedDouble(), maxLife = 10))
+        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         move(motionX, motionY)
         if (collidedVert || collidedHor) {
             if (this.additionalData.getInt("bounces") >= 3) {

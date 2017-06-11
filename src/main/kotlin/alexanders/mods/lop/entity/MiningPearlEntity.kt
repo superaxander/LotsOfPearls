@@ -1,6 +1,7 @@
 package alexanders.mods.lop.entity
 
 import alexanders.mods.lop.LOP
+import alexanders.mods.lop.render.PearlParticle
 import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.RockBottomAPI
@@ -42,7 +43,7 @@ class MiningPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
         val recoveryX = motionX
         val recoveryY = motionY
         super.update(game)
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * TeleportationParticle.randomSignedDouble(), maxLife = 10))
+        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (collidedVert || collidedHor) {
             motionX = recoveryX
             motionY = recoveryY

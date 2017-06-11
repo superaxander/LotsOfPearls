@@ -1,20 +1,22 @@
 package alexanders.mods.lop.entity
 
 import alexanders.mods.lop.LOP
-import alexanders.mods.lop.net.EntityPositionUpdatePacket
+import alexanders.mods.lop.net.BloodPacket
+import alexanders.mods.lop.render.BloodParticle
 import alexanders.mods.lop.render.PearlParticle
 import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.data.set.DataSet
 import de.ellpeck.rockbottom.api.entity.EntityItem
+import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer
 import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.world.IWorld
 import org.newdawn.slick.geom.Vector2f
 import java.util.*
 
 
-class PearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.PEARL_RESOURCE))) {
+class SpikyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.SPIKY_PEARL_RESOURCE))) {
     init {
         if (this.additionalData == null) {
             this.additionalData = DataSet()
@@ -38,21 +40,24 @@ class PearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f 
 
     override fun update(game: IGameInstance) {
         super.update(game)
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
-        if (collidedVert || collidedHor) {
+        val collidingPlayers = world.getEntities(boundingBox.copy().add(x, y), AbstractEntityPlayer::class.java)
+        for (player in collidingPlayers) {
             val uuid = this.additionalData.getUniqueId("playerUUID")
-            //println("$x , $y")
             if (uuid != null) {
-                val e = world.getEntity(uuid)
-                if (e != null) {
-                    e.setPos(this.x, this.y + 1.2f)
-                    if (RockBottomAPI.getNet().isServer) {
-                        RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + 1.2f))
-                    }
-                    for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
+                if (player.uniqueId != uuid) {
+                    player.health = player.health - 1
+                    if (RockBottomAPI.getNet().isServer)
+                        RockBottomAPI.getNet().sendToAllPlayers(world, BloodPacket(x, y))
+                    
+                    for (i in 0..20) game.particleManager.addParticle(BloodParticle(world = game.world, x = x, y = y, maxLife = 40))
+                    this.kill()
 
                 }
             }
+        }
+        if (collidingPlayers.isEmpty())
+            game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
+        if (collidedVert || collidedHor) {
             this.kill()
         }
     }

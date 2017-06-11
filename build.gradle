@@ -1,5 +1,5 @@
 group 'alexanders.mods.lop'
-version '0.3'
+version '0.4'
 
 buildscript {
     ext.kotlin_version = '1.1.2-2'

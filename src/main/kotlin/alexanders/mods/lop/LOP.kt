@@ -1,10 +1,12 @@
 package alexanders.mods.lop
 
 import alexanders.mods.lop.entity.BouncyPearlEntity
+import alexanders.mods.lop.entity.MiningPearlEntity
 import alexanders.mods.lop.entity.PearlEntity
 import alexanders.mods.lop.entity.RideablePearlEntity
 import alexanders.mods.lop.event.ItemUsageListener
 import alexanders.mods.lop.item.BouncyPearlItem
+import alexanders.mods.lop.item.MiningPearlItem
 import alexanders.mods.lop.item.PearlItem
 import alexanders.mods.lop.item.RideablePearlItem
 import alexanders.mods.lop.net.CooldownUpdatePacket
@@ -32,13 +34,15 @@ class LOP() : IMod {
     val PEARL_RESOURCE = RockBottomAPI.createRes(this, "pearl")
     val BOUNCY_PEARL_RESOURCE = RockBottomAPI.createRes(this, "bouncy_pearl")
     val RIDEABLE_PEARL_RESOURCE = RockBottomAPI.createRes(this, "rideable_pearl")
+    val MINING_PEARL_RESOURCE = RockBottomAPI.createRes(this, "mining_pearl")
     val COOLDOWN_RESOURCE = RockBottomAPI.createRes(this, "cooldown")
     val PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.pearl")
     val BOUNCY_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.bouncy_pearl")
     val RIDEABLE_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.rideable_pearl")
+    val MINING_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.mining_pearl")
     val TELEPORTATION_PARTICLE_RESOURCE = RockBottomAPI.createRes(this, "particles.teleportation")
 
-    override fun getVersion() = "0.3"
+    override fun getVersion() = "0.4"
 
     override fun getId() = "lop"
 
@@ -63,10 +67,12 @@ class LOP() : IMod {
         RockBottomAPI.ITEM_REGISTRY.register(PEARL_RESOURCE, PearlItem())
         RockBottomAPI.ITEM_REGISTRY.register(BOUNCY_PEARL_RESOURCE, BouncyPearlItem())
         RockBottomAPI.ITEM_REGISTRY.register(RIDEABLE_PEARL_RESOURCE, RideablePearlItem())
+        RockBottomAPI.ITEM_REGISTRY.register(MINING_PEARL_RESOURCE, MiningPearlItem())
 
         // Register entities
         RockBottomAPI.ENTITY_REGISTRY.register(PEARL_RESOURCE, PearlEntity::class.java)
         RockBottomAPI.ENTITY_REGISTRY.register(BOUNCY_PEARL_RESOURCE, BouncyPearlEntity::class.java)
         RockBottomAPI.ENTITY_REGISTRY.register(RIDEABLE_PEARL_RESOURCE, RideablePearlEntity::class.java)
+        RockBottomAPI.ENTITY_REGISTRY.register(MINING_PEARL_RESOURCE, MiningPearlEntity::class.java)
     }
 }

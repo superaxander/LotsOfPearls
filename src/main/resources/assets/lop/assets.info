@@ -1,6 +1,7 @@
 tex.items.pearl=/item/pearl.png
 tex.items.bouncy_pearl=/item/bouncy_pearl.png
 tex.items.rideable_pearl=/item/rideable_pearl.png
+tex.items.mining_pearl=/item/mining_pearl.png
 tex.cooldown=/item/cooldown.png
 tex.particles.teleportation=/particle/teleportation.png
 loc.us_english=/loc/us_english.loc

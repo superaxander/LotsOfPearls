@@ -5,6 +5,7 @@ lop/item.mining_pearl=Mining Pearl
 lop/item.spiky_pearl=Spiky Pearl
 lop/item.spawn_pearl=Spawn Pearl
 lop/item.waypoint_pearl=Waypoint Pearl
+
 lop/desc.pearl=A pearl that teleports you. What else did you expect?
 lop/desc.bouncy_pearl=A teleporation pearl that bounces. What else did you expect?
 lop/desc.rideable_pearl=A rideable teleportation pearl. What else did you expect?
@@ -15,3 +16,12 @@ lop/desc.waypoint_pearl=A pearl that teleports you to a waypoint. What else did 
 lop/desc.waypoint_pearl_usage=Right-click to teleport, shift-right-click to set the waypoint to your current location
 lop/desc.set_to=Waypoint set to: 
 lop/desc.more_info=Hold shift for more information
+
+lop/button.waypoint=Waypoint Pearl
+lop/button.pearl=Teleportation Pearl
+lop/button.spiky=Spiky Pearl
+lop/button.spawn=Spawn Pearl
+lop/button.rideable=Rideable Pearl
+lop/button.bouncy=Bouncy Teleportation Pearl
+lop/button.mining=Mining Pearl
+

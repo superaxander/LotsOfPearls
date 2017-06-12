@@ -48,7 +48,7 @@ class SpikyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vect
                     player.health = player.health - 1
                     if (RockBottomAPI.getNet().isServer)
                         RockBottomAPI.getNet().sendToAllPlayers(world, BloodPacket(x, y))
-                    
+
                     for (i in 0..20) game.particleManager.addParticle(BloodParticle(world = game.world, x = x, y = y, maxLife = 40))
                     this.kill()
 

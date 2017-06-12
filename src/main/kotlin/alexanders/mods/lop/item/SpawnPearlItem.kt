@@ -44,5 +44,9 @@ class SpawnPearlItem() : ItemBasic(LOP.instance.SPAWN_PEARL_RESOURCE), Useable {
     override fun getRenderer(): IItemRenderer<*> {
         return renderer
     }
+
+    override fun getMaxAmount(): Int {
+        return 1
+    }
 }
 

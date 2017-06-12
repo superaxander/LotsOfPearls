@@ -54,7 +54,7 @@ class MiningPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
             //println("$x , $y")
             if (uuid != null) {
                 val player = world.getEntity(uuid)
-                if (player is AbstractEntityPlayer&& (RockBottomAPI.getNet().isServer||!RockBottomAPI.getNet().isActive) && breakAround(player))
+                if (player is AbstractEntityPlayer && (RockBottomAPI.getNet().isServer || !RockBottomAPI.getNet().isActive) && breakAround(player))
                     this.additionalData.addInt("tilesBroken", tilesBroken + 1)
             }
             if (this.motionX == .0 && motionY == .0 || tilesBroken >= 6)

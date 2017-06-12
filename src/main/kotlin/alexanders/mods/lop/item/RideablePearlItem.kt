@@ -1,7 +1,6 @@
 package alexanders.mods.lop.item
 
 import alexanders.mods.lop.LOP
-import alexanders.mods.lop.entity.PearlEntity
 import alexanders.mods.lop.entity.RideablePearlEntity
 import alexanders.mods.lop.net.CooldownUpdatePacket
 import alexanders.mods.lop.render.PearlItemRenderer

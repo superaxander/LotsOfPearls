@@ -7,12 +7,14 @@ import alexanders.mods.lop.net.BloodPacket
 import alexanders.mods.lop.net.CooldownUpdatePacket
 import alexanders.mods.lop.net.EntityPositionUpdatePacket
 import alexanders.mods.lop.net.ItemUsePacket
+import alexanders.mods.lop.render.ConfigGUI
 import de.ellpeck.rockbottom.api.IApiHandler
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.assets.IAssetManager
 import de.ellpeck.rockbottom.api.event.IEventHandler
 import de.ellpeck.rockbottom.api.event.impl.EntityTickEvent
+import de.ellpeck.rockbottom.api.gui.Gui
 import de.ellpeck.rockbottom.api.mod.IMod
 
 
@@ -47,6 +49,8 @@ class LOP() : IMod {
     val TELEPORTATION_PARTICLE_RESOURCE = RockBottomAPI.createRes(this, "particles.teleportation")
     val BLOOD_PARTICLE_RESOURCE = RockBottomAPI.createRes(this, "particles.blood")
 
+    val configManager = ConfigurationManager()
+
     override fun getVersion() = "0.6"
 
     override fun getId() = "lop"
@@ -56,6 +60,10 @@ class LOP() : IMod {
     override fun getResourceLocation() = "/assets/$id"
 
     override fun getDescription(): String = "Adds a bunch of pearls. What else did you expect?"
+
+    override fun getModGuiClass(): Class<out Gui> {
+        return ConfigGUI::class.java
+    }
 
     override fun init(game: IGameInstance, assetManager: IAssetManager, apiHandler: IApiHandler, eventHandler: IEventHandler) {
         val itemUsageListener = ItemUsageListener()
@@ -70,19 +78,31 @@ class LOP() : IMod {
         RockBottomAPI.PACKET_REGISTRY.register(RockBottomAPI.PACKET_REGISTRY.nextFreeId, BloodPacket::class.java)
 
         // Register items
-        RockBottomAPI.ITEM_REGISTRY.register(PEARL_RESOURCE, PearlItem())
-        RockBottomAPI.ITEM_REGISTRY.register(BOUNCY_PEARL_RESOURCE, BouncyPearlItem())
-        RockBottomAPI.ITEM_REGISTRY.register(RIDEABLE_PEARL_RESOURCE, RideablePearlItem())
-        RockBottomAPI.ITEM_REGISTRY.register(MINING_PEARL_RESOURCE, MiningPearlItem())
-        RockBottomAPI.ITEM_REGISTRY.register(SPIKY_PEARL_RESOURCE, SpikyPearlItem())
-        RockBottomAPI.ITEM_REGISTRY.register(SPAWN_PEARL_RESOURCE, SpawnPearlItem())
-        RockBottomAPI.ITEM_REGISTRY.register(WAYPOINT_PEARL_RESOURCE, WaypointPearlItem())
+        if (configManager.isEnabled("pearl"))
+            RockBottomAPI.ITEM_REGISTRY.register(PEARL_RESOURCE, PearlItem())
+        if (configManager.isEnabled("bouncy"))
+            RockBottomAPI.ITEM_REGISTRY.register(BOUNCY_PEARL_RESOURCE, BouncyPearlItem())
+        if (configManager.isEnabled("rideable"))
+            RockBottomAPI.ITEM_REGISTRY.register(RIDEABLE_PEARL_RESOURCE, RideablePearlItem())
+        if (configManager.isEnabled("mining"))
+            RockBottomAPI.ITEM_REGISTRY.register(MINING_PEARL_RESOURCE, MiningPearlItem())
+        if (configManager.isEnabled("spiky"))
+            RockBottomAPI.ITEM_REGISTRY.register(SPIKY_PEARL_RESOURCE, SpikyPearlItem())
+        if (configManager.isEnabled("spawn"))
+            RockBottomAPI.ITEM_REGISTRY.register(SPAWN_PEARL_RESOURCE, SpawnPearlItem())
+        if (configManager.isEnabled("waypoint"))
+            RockBottomAPI.ITEM_REGISTRY.register(WAYPOINT_PEARL_RESOURCE, WaypointPearlItem())
 
         // Register entities
-        RockBottomAPI.ENTITY_REGISTRY.register(PEARL_RESOURCE, PearlEntity::class.java)
-        RockBottomAPI.ENTITY_REGISTRY.register(BOUNCY_PEARL_RESOURCE, BouncyPearlEntity::class.java)
-        RockBottomAPI.ENTITY_REGISTRY.register(RIDEABLE_PEARL_RESOURCE, RideablePearlEntity::class.java)
-        RockBottomAPI.ENTITY_REGISTRY.register(MINING_PEARL_RESOURCE, MiningPearlEntity::class.java)
-        RockBottomAPI.ENTITY_REGISTRY.register(SPIKY_PEARL_RESOURCE, SpikyPearlEntity::class.java)
+        if (configManager.isEnabled("pearl"))
+            RockBottomAPI.ENTITY_REGISTRY.register(PEARL_RESOURCE, PearlEntity::class.java)
+        if (configManager.isEnabled("bouncy"))
+            RockBottomAPI.ENTITY_REGISTRY.register(BOUNCY_PEARL_RESOURCE, BouncyPearlEntity::class.java)
+        if (configManager.isEnabled("rideable"))
+            RockBottomAPI.ENTITY_REGISTRY.register(RIDEABLE_PEARL_RESOURCE, RideablePearlEntity::class.java)
+        if (configManager.isEnabled("mining"))
+            RockBottomAPI.ENTITY_REGISTRY.register(MINING_PEARL_RESOURCE, MiningPearlEntity::class.java)
+        if (configManager.isEnabled("spiky"))
+            RockBottomAPI.ENTITY_REGISTRY.register(SPIKY_PEARL_RESOURCE, SpikyPearlEntity::class.java)
     }
 }

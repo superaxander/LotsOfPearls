@@ -13,7 +13,7 @@ import de.ellpeck.rockbottom.api.render.item.IItemRenderer
 import org.newdawn.slick.geom.Vector2f
 
 
-class MiningPearlItem: ItemBasic(LOP.instance.MINING_PEARL_RESOURCE), Useable {
+class MiningPearlItem : ItemBasic(LOP.instance.MINING_PEARL_RESOURCE), Useable {
     val renderer = PearlItemRenderer(LOP.instance.MINING_PEARL_RESOURCE)
     override fun use(itemInstance: ItemInstance, mouseDirection: Vector2f, player: AbstractEntityPlayer) {
         if (itemInstance.additionalData == null) {

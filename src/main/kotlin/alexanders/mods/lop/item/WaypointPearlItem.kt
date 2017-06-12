@@ -55,13 +55,17 @@ class WaypointPearlItem() : ItemBasic(LOP.instance.WAYPOINT_PEARL_RESOURCE), Use
                 instance.additionalData.addDouble("waypoint_y", RockBottomAPI.getGame().world.getLowestAirUpwards(TileLayer.MAIN, RockBottomAPI.getGame().world.spawnX, 0) + .5)
             }
             desc.add("${manager.localize(LOP.instance.SET_TO_DESC_RESOURCE)}${instance.additionalData.getDouble("waypoint_x")}, ${instance.additionalData.getDouble("waypoint_y")}")
-        }else {
+        } else {
             desc.add(manager.localize(LOP.instance.MORE_INFO_DESC_RESOURCE))
         }
     }
 
     override fun getRenderer(): IItemRenderer<*> {
         return renderer
+    }
+
+    override fun getMaxAmount(): Int {
+        return 1
     }
 }
 

@@ -31,16 +31,23 @@ class LOP() : IMod {
     val RIDEABLE_PEARL_RESOURCE = RockBottomAPI.createRes(this, "rideable_pearl")
     val MINING_PEARL_RESOURCE = RockBottomAPI.createRes(this, "mining_pearl")
     val SPIKY_PEARL_RESOURCE = RockBottomAPI.createRes(this, "spiky_pearl")
+    val SPAWN_PEARL_RESOURCE = RockBottomAPI.createRes(this, "spawn_pearl")
+    val WAYPOINT_PEARL_RESOURCE = RockBottomAPI.createRes(this, "waypoint_pearl")
     val COOLDOWN_RESOURCE = RockBottomAPI.createRes(this, "cooldown")
     val PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.pearl")
     val BOUNCY_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.bouncy_pearl")
     val RIDEABLE_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.rideable_pearl")
     val MINING_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.mining_pearl")
     val SPIKY_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.spiky_pearl")
+    val SPAWN_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.spawn_pearl")
+    val WAYPOINT_PEARL_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.waypoint_pearl")
+    val WAYPOINT_PEARL_USAGE_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.waypoint_pearl_usage")
+    val SET_TO_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.set_to")
+    val MORE_INFO_DESC_RESOURCE = RockBottomAPI.createRes(this, "desc.more_info")
     val TELEPORTATION_PARTICLE_RESOURCE = RockBottomAPI.createRes(this, "particles.teleportation")
     val BLOOD_PARTICLE_RESOURCE = RockBottomAPI.createRes(this, "particles.blood")
 
-    override fun getVersion() = "0.5"
+    override fun getVersion() = "0.6"
 
     override fun getId() = "lop"
 
@@ -68,6 +75,8 @@ class LOP() : IMod {
         RockBottomAPI.ITEM_REGISTRY.register(RIDEABLE_PEARL_RESOURCE, RideablePearlItem())
         RockBottomAPI.ITEM_REGISTRY.register(MINING_PEARL_RESOURCE, MiningPearlItem())
         RockBottomAPI.ITEM_REGISTRY.register(SPIKY_PEARL_RESOURCE, SpikyPearlItem())
+        RockBottomAPI.ITEM_REGISTRY.register(SPAWN_PEARL_RESOURCE, SpawnPearlItem())
+        RockBottomAPI.ITEM_REGISTRY.register(WAYPOINT_PEARL_RESOURCE, WaypointPearlItem())
 
         // Register entities
         RockBottomAPI.ENTITY_REGISTRY.register(PEARL_RESOURCE, PearlEntity::class.java)

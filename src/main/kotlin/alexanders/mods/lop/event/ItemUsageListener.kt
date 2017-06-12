@@ -53,9 +53,9 @@ class ItemUsageListener : MouseListener, IEventListener<EntityTickEvent> {
             if (player.inv[player.selectedSlot] != null) {
 
                 if (net.isClient) {
-                    net.sendToServer(ItemUsePacket(angle(x, y), player.uniqueId))
+                    net.sendToServer(ItemUsePacket(angle(x, y), player.uniqueId, game.container.input.isKeyDown(Input.KEY_LSHIFT)))
                 } else {
-                    ItemUsePacket(angle(x, y), player.uniqueId).handle(game, null)
+                    ItemUsePacket(angle(x, y), player.uniqueId, game.container.input.isKeyDown(Input.KEY_LSHIFT)).handle(game, null)
                 }
             }
             //}

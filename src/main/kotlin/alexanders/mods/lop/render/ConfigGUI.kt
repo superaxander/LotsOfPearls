@@ -21,7 +21,7 @@ class ConfigGUI(parent: Gui) : Gui(374, 132, parent) {
 
         for ((key, value) in configuration.properties) {//TODO: do height bounds checking and add a scrollbar
             buttonList.add(currentID, key as String)
-            val buttonText = assetManager.localize(RockBottomAPI.createRes(LOP.instance, "button.$key"))+": $value"
+            val buttonText = assetManager.localize(RockBottomAPI.createRes(LOP.instance, "button.$key")) + ": $value"
             if (even)
                 components.add(ComponentButton(this, currentID, guiLeft, guiTop + 30 * row, 190, 16, buttonText))
             else {
@@ -56,7 +56,7 @@ class ConfigGUI(parent: Gui) : Gui(374, 132, parent) {
                         //println(bool)
                         configuration.properties.setProperty(buttonKey, bool.toString())
                         val button_component = components[button]
-                        components[button] = ComponentButton(this, button, button_component.x, button_component.y, button_component.sizeX, button_component.sizeY, assetManager.localize(RockBottomAPI.createRes(LOP.instance, "button.$buttonKey"))+": "+bool)
+                        components[button] = ComponentButton(this, button, button_component.x, button_component.y, button_component.sizeX, button_component.sizeY, assetManager.localize(RockBottomAPI.createRes(LOP.instance, "button.$buttonKey")) + ": " + bool)
                         return true
                     }
                 }

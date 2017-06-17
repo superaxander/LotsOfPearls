@@ -4,7 +4,6 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.nio.file.Files
-import java.util.*
 
 
 class ConfigurationManager {
@@ -20,7 +19,7 @@ class ConfigurationManager {
     val file = File("./rockbottom/config/lop.properties")
 
     init {
-        println(properties)
+        //println(properties)
         if (file.exists()) {
             load()
         } else {
@@ -29,7 +28,7 @@ class ConfigurationManager {
                 Files.createDirectory(directory.toPath())
         }
         save()
-        println(properties)
+       //println(properties)
     }
 
     fun load() {

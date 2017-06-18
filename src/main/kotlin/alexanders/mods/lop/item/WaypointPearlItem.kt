@@ -1,6 +1,10 @@
 package alexanders.mods.lop.item
 
-import alexanders.mods.lop.LOP
+import alexanders.mods.lop.init.Resources.MORE_INFO_DESC_RESOURCE
+import alexanders.mods.lop.init.Resources.SET_TO_DESC_RESOURCE
+import alexanders.mods.lop.init.Resources.WAYPOINT_PEARL_DESC_RESOURCE
+import alexanders.mods.lop.init.Resources.WAYPOINT_PEARL_RESOURCE
+import alexanders.mods.lop.init.Resources.WAYPOINT_PEARL_USAGE_DESC_RESOURCE
 import alexanders.mods.lop.net.CooldownUpdatePacket
 import alexanders.mods.lop.net.EntityPositionUpdatePacket
 import alexanders.mods.lop.render.PearlItemRenderer
@@ -16,8 +20,8 @@ import de.ellpeck.rockbottom.api.world.TileLayer
 import org.newdawn.slick.geom.Vector2f
 
 
-class WaypointPearlItem() : ItemBasic(LOP.instance.WAYPOINT_PEARL_RESOURCE), Useable {
-    val renderer = PearlItemRenderer(LOP.instance.WAYPOINT_PEARL_RESOURCE)
+class WaypointPearlItem() : ItemBasic(WAYPOINT_PEARL_RESOURCE), Useable {
+    val renderer = PearlItemRenderer(WAYPOINT_PEARL_RESOURCE)
     override fun use(itemInstance: ItemInstance, mouseDirection: Vector2f, player: AbstractEntityPlayer, shiftPressed: Boolean) {
         if (itemInstance.additionalData == null) {
             itemInstance.additionalData = DataSet()
@@ -45,18 +49,18 @@ class WaypointPearlItem() : ItemBasic(LOP.instance.WAYPOINT_PEARL_RESOURCE), Use
 
     override fun describeItem(manager: IAssetManager, instance: ItemInstance, desc: MutableList<String>, isAdvanced: Boolean) {
         super.describeItem(manager, instance, desc, isAdvanced)
-        desc.add(manager.localize(LOP.instance.WAYPOINT_PEARL_DESC_RESOURCE))
+        desc.add(manager.localize(WAYPOINT_PEARL_DESC_RESOURCE))
         if (isAdvanced) {
-            desc.add(manager.localize(LOP.instance.WAYPOINT_PEARL_USAGE_DESC_RESOURCE))
+            desc.add(manager.localize(WAYPOINT_PEARL_USAGE_DESC_RESOURCE))
             if (instance.additionalData == null) {
                 instance.additionalData = DataSet()
                 instance.additionalData.addInt("cooldown", 0)
                 instance.additionalData.addDouble("waypoint_x", RockBottomAPI.getGame().world.spawnX + .5)
                 instance.additionalData.addDouble("waypoint_y", RockBottomAPI.getGame().world.getLowestAirUpwards(TileLayer.MAIN, RockBottomAPI.getGame().world.spawnX, 0) + .5)
             }
-            desc.add("${manager.localize(LOP.instance.SET_TO_DESC_RESOURCE)}${instance.additionalData.getDouble("waypoint_x")}, ${instance.additionalData.getDouble("waypoint_y")}")
+            desc.add("${manager.localize(SET_TO_DESC_RESOURCE)}${instance.additionalData.getDouble("waypoint_x")}, ${instance.additionalData.getDouble("waypoint_y")}")
         } else {
-            desc.add(manager.localize(LOP.instance.MORE_INFO_DESC_RESOURCE))
+            desc.add(manager.localize(MORE_INFO_DESC_RESOURCE))
         }
     }
 

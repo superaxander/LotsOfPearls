@@ -7,7 +7,7 @@ import de.ellpeck.rockbottom.api.gui.Gui
 import de.ellpeck.rockbottom.api.gui.component.ComponentButton
 
 
-class ConfigGUI(parent: Gui) : Gui(374, 132, parent) {
+class ConfigGUI(parent: Gui) : Gui(374, 200, parent) {
 
     var currentID = 0
     val configuration = LOP.instance.configManager
@@ -15,6 +15,7 @@ class ConfigGUI(parent: Gui) : Gui(374, 132, parent) {
 
     override fun initGui(game: IGameInstance) {
         super.initGui(game)
+        buttonList.clear()
         val assetManager = game.assetManager
         var row = 0
         var even = true // yes I know 0 isn't even!
@@ -32,7 +33,7 @@ class ConfigGUI(parent: Gui) : Gui(374, 132, parent) {
             even = !even
         }
 
-        components.add(ComponentButton(this, -1, guiLeft + 92, guiTop + 116, 190, 16, assetManager.localize(RockBottomAPI.createRes(RockBottomAPI.getModLoader().getMod("rockbottom"), "button.back"))))
+        components.add(ComponentButton(this, -1, guiLeft + 92, guiTop + 184, 190, 16, assetManager.localize(RockBottomAPI.createRes(RockBottomAPI.getModLoader().getMod("rockbottom"), "button.back"))))
     }
 
     override fun onButtonActivated(game: IGameInstance, button: Int): Boolean {

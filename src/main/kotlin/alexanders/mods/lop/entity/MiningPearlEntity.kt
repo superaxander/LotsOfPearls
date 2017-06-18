@@ -1,6 +1,6 @@
 package alexanders.mods.lop.entity
 
-import alexanders.mods.lop.LOP
+import alexanders.mods.lop.init.Items.miningPearlItem
 import alexanders.mods.lop.render.PearlParticle
 import alexanders.mods.lop.render.TeleportationParticle
 import de.ellpeck.rockbottom.api.IGameInstance
@@ -15,7 +15,7 @@ import org.newdawn.slick.geom.Vector2f
 import java.util.*
 
 
-class MiningPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.PEARL_RESOURCE))) {
+class MiningPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(miningPearlItem)) {
 
     init {
         if (this.additionalData == null) {

@@ -1,6 +1,6 @@
 package alexanders.mods.lop.entity
 
-import alexanders.mods.lop.LOP
+import alexanders.mods.lop.init.Items.spikyPearlItem
 import alexanders.mods.lop.net.BloodPacket
 import alexanders.mods.lop.render.BloodParticle
 import alexanders.mods.lop.render.PearlParticle
@@ -16,7 +16,7 @@ import org.newdawn.slick.geom.Vector2f
 import java.util.*
 
 
-class SpikyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.SPIKY_PEARL_RESOURCE))) {
+class SpikyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(spikyPearlItem)) {
     init {
         if (this.additionalData == null) {
             this.additionalData = DataSet()

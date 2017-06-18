@@ -1,21 +1,21 @@
 package alexanders.mods.lop.item
 
-import alexanders.mods.lop.init.Resources.PEARL_DESC_RESOURCE
-import alexanders.mods.lop.init.Resources.PEARL_RESOURCE
-import alexanders.mods.lop.entity.PearlEntity
+import alexanders.mods.lop.init.Resources.BRIDGING_PEARL_DESC_RESOURCE
+import alexanders.mods.lop.init.Resources.BRIDGING_PEARL_RESOURCE
+import alexanders.mods.lop.entity.BridgingPearlEntity
 import alexanders.mods.lop.net.CooldownUpdatePacket
 import alexanders.mods.lop.render.PearlItemRenderer
 import de.ellpeck.rockbottom.api.assets.IAssetManager
 import de.ellpeck.rockbottom.api.data.set.DataSet
 import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer
-import de.ellpeck.rockbottom.api.item.ItemBasic
+import de.ellpeck.rockbottom.api.item.Item
 import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer
 import org.newdawn.slick.geom.Vector2f
 
 
-class PearlItem() : ItemBasic(PEARL_RESOURCE), Useable {
-    val renderer = PearlItemRenderer(PEARL_RESOURCE)
+class BridgingPearlItem : Item(BRIDGING_PEARL_RESOURCE), Useable {
+    val renderer = PearlItemRenderer(BRIDGING_PEARL_RESOURCE)
     override fun use(itemInstance: ItemInstance, mouseDirection: Vector2f, player: AbstractEntityPlayer) {
         if (itemInstance.additionalData == null) {
             itemInstance.additionalData = DataSet()
@@ -23,7 +23,7 @@ class PearlItem() : ItemBasic(PEARL_RESOURCE), Useable {
         }
         val cooldown = itemInstance.additionalData.getInt("cooldown")
         if (cooldown <= 0) {
-            val pearlEntity = PearlEntity(player.world, player.uniqueId, mouseDirection)
+            val pearlEntity = BridgingPearlEntity(player.world, player.uniqueId, mouseDirection)
             player.world.addEntity(pearlEntity)
             itemInstance.additionalData.addInt("cooldown", 60)
             if (itemInstance.removeAmount(1).amount <= 0)
@@ -34,7 +34,7 @@ class PearlItem() : ItemBasic(PEARL_RESOURCE), Useable {
 
     override fun describeItem(manager: IAssetManager, instance: ItemInstance, desc: MutableList<String>, isAdvanced: Boolean) {
         super.describeItem(manager, instance, desc, isAdvanced)
-        desc.add(manager.localize(PEARL_DESC_RESOURCE))
+        desc.add(manager.localize(BRIDGING_PEARL_DESC_RESOURCE))
     }
 
     override fun getRenderer(): IItemRenderer<*> {

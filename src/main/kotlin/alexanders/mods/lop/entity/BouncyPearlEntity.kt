@@ -1,6 +1,6 @@
 package alexanders.mods.lop.entity
 
-import alexanders.mods.lop.LOP
+import alexanders.mods.lop.init.Items.bouncyPearlItem
 import alexanders.mods.lop.net.EntityPositionUpdatePacket
 import alexanders.mods.lop.render.PearlParticle
 import alexanders.mods.lop.render.TeleportationParticle
@@ -12,9 +12,10 @@ import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.world.IWorld
 import org.newdawn.slick.geom.Vector2f
 import java.util.*
+//TODO: fix all the errors
+//TODO: worldgen
 
-
-class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.BOUNCY_PEARL_RESOURCE))) {
+class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(bouncyPearlItem)) {
     init {
         if (this.additionalData == null) {
             this.additionalData = DataSet()

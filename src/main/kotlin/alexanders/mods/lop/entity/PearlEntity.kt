@@ -1,6 +1,6 @@
 package alexanders.mods.lop.entity
 
-import alexanders.mods.lop.LOP
+import alexanders.mods.lop.init.Items.pearlItem
 import alexanders.mods.lop.net.EntityPositionUpdatePacket
 import alexanders.mods.lop.render.PearlParticle
 import alexanders.mods.lop.render.TeleportationParticle
@@ -14,7 +14,7 @@ import org.newdawn.slick.geom.Vector2f
 import java.util.*
 
 
-class PearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(RockBottomAPI.ITEM_REGISTRY.get(LOP.instance.PEARL_RESOURCE))) {
+class PearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(pearlItem)) {
     init {
         if (this.additionalData == null) {
             this.additionalData = DataSet()

@@ -14,7 +14,10 @@ class ConfigurationManager {
             "mining" to "true",
             "spiky" to "true",
             "spawn" to "true",
-            "waypoint" to "true")
+            "waypoint" to "true",
+            "bridging" to "true",
+            "ore" to "true", 
+            "slime" to "true")
 
     val file = File("./rockbottom/config/lop.properties")
 
@@ -28,7 +31,7 @@ class ConfigurationManager {
                 Files.createDirectory(directory.toPath())
         }
         save()
-       //println(properties)
+        //println(properties)
     }
 
     fun load() {

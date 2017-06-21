@@ -12,4 +12,6 @@ tex.tiles.slime=/tile/slime.png
 tex.cooldown=/item/cooldown.png
 tex.particles.teleportation=/particle/teleportation.png
 tex.particles.blood=/particle/blood.png
+tex.button.up=/gui/up_button.png
+tex.button.down=/gui/down_button.png
 loc.us_english=/loc/us_english.loc

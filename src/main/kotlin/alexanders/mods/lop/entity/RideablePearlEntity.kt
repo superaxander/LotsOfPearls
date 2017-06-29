@@ -39,7 +39,8 @@ class RideablePearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
     override fun update(game: IGameInstance) {
         super.update(game)
         val uuid = this.additionalData.getUniqueId("playerUUID")
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
+        if (!game.isDedicatedServer)
+            game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (uuid != null) {
             world.getEntity(uuid)?.setPos(x, y + .8f)
             world.getEntity(uuid)?.fallAmount = 0
@@ -56,7 +57,8 @@ class RideablePearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
                     if (RockBottomAPI.getNet().isServer) {
                         RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + 1.2f))
                     }
-                    for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
+                    if (!game.isDedicatedServer)
+                        for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
                     this.kill()
                 }
             }

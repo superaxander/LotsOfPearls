@@ -16,7 +16,7 @@ class ConfigurationManager {
             "spawn" to "true",
             "waypoint" to "true",
             "bridging" to "true",
-            "ore" to "true", 
+            "ore" to "true",
             "slime" to "true")
 
     val file = File("./rockbottom/config/lop.properties")

@@ -10,7 +10,7 @@ import de.ellpeck.rockbottom.api.world.IWorld
 import de.ellpeck.rockbottom.api.world.TileLayer
 
 
-class PearlOreTile : TileBasic(Resources.PEARL_ORE_RESOURCE){
+class PearlOreTile : TileBasic(Resources.PEARL_ORE_RESOURCE) {
     init {
         this.setHardness(5f)
         addEffectiveTool(ToolType.PICKAXE, 2)

@@ -48,15 +48,16 @@ class SpikyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vect
                     player.health = player.health - 1
                     if (RockBottomAPI.getNet().isServer)
                         RockBottomAPI.getNet().sendToAllPlayers(world, BloodPacket(x, y))
-
-                    for (i in 0..20) game.particleManager.addParticle(BloodParticle(world = game.world, x = x, y = y, maxLife = 40))
+                    if (!game.isDedicatedServer)
+                        for (i in 0..20) game.particleManager.addParticle(BloodParticle(world = game.world, x = x, y = y, maxLife = 40))
                     this.kill()
 
                 }
             }
         }
         if (collidingPlayers.isEmpty())
-            game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
+            if (!game.isDedicatedServer)
+                game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (collidedVert || collidedHor) {
             this.kill()
         }

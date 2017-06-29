@@ -66,8 +66,8 @@ object Resources {
         TELEPORTATION_PARTICLE_RESOURCE = RockBottomAPI.createRes(lop, "particles.teleportation")!!
         BLOOD_PARTICLE_RESOURCE = RockBottomAPI.createRes(lop, "particles.blood")!!
 
-       UP_ARROW = RockBottomAPI.createRes(lop, "button.up")
-       DOWN_ARROW = RockBottomAPI.createRes(lop, "button.down")
+        UP_ARROW = RockBottomAPI.createRes(lop, "button.up")
+        DOWN_ARROW = RockBottomAPI.createRes(lop, "button.down")
 
     }
 }

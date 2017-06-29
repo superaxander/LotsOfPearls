@@ -53,7 +53,9 @@ class SlimePoolGen : IWorldGenerator {
 
     override fun getPriority(): Int = 400
 
-    fun register() {
-        RockBottomAPI.WORLD_GENERATORS.add(this)
+    companion object {
+        fun register() {
+            RockBottomAPI.WORLD_GENERATORS.add(SlimePoolGen::class.java)
+        }
     }
 }

@@ -18,7 +18,7 @@ class PearlItemRenderer(resourceName: IResourceName) : DefaultItemRenderer<Item>
             return
 
         if (instance.additionalData != null && instance.additionalData.getInt("cooldown") > 0) {
-            val image = manager.getImage(COOLDOWN_RESOURCE)
+            val image = manager.getTexture(COOLDOWN_RESOURCE)
             image.alpha = .5f
             image.draw(x, y, scale, (scale / 60 * instance.additionalData.getInt("cooldown")), filter)
         }

@@ -45,7 +45,7 @@ class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
                 currentRow.add(ComponentButton(this, currentID++, guiLeft + 184, guiTop + 30 * rows.size, 180, 16, buttonText))
         }
         rows.add(currentRow.toTypedArray())
-        upButton = ComponentButton(this, -2, guiLeft + 374, guiTop+3, 10, 10, "")
+        upButton = ComponentButton(this, -2, guiLeft + 374, guiTop + 3, 10, 10, "")
         downButton = ComponentButton(this, -3, guiLeft + 374, guiTop + 93, 10, 10, "")
         backButton = ComponentButton(this, -1, guiLeft + 92, guiTop + 120, 190, 16, assetManager.localize(RockBottomAPI.createRes(RockBottomAPI.getModLoader().getMod("rockbottom"), "button.back")))
         updateComponentList()
@@ -94,8 +94,8 @@ class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
 
     override fun renderOverlay(game: IGameInstance, manager: IAssetManager, g: Graphics) {
         super.renderOverlay(game, manager, g)
-        manager.getImage(Resources.UP_ARROW).draw(upButton.x.toFloat(), upButton.y.toFloat(), upButton.sizeX.toFloat(), upButton.sizeY.toFloat())
-        manager.getImage(Resources.DOWN_ARROW).draw(downButton.x.toFloat(), downButton.y.toFloat(), downButton.sizeX.toFloat(), downButton.sizeY.toFloat())
+        manager.getTexture(Resources.UP_ARROW).draw(upButton.x.toFloat(), upButton.y.toFloat(), upButton.sizeX.toFloat(), upButton.sizeY.toFloat())
+        manager.getTexture(Resources.DOWN_ARROW).draw(downButton.x.toFloat(), downButton.y.toFloat(), downButton.sizeX.toFloat(), downButton.sizeY.toFloat())
     }
 
     private fun scrollDown() {

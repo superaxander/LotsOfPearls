@@ -12,6 +12,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.world.IWorld
 import org.newdawn.slick.geom.Vector2f
 import java.util.*
+
 //TODO: fix all the errors
 //TODO: worldgen
 
@@ -39,7 +40,8 @@ class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
 
     override fun update(game: IGameInstance) {
         applyMotion()
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
+        if (!game.isDedicatedServer)
+            game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         move(motionX, motionY)
         if (collidedVert || collidedHor) {
             if (this.additionalData.getInt("bounces") >= 3) {
@@ -51,8 +53,10 @@ class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
                         e.setPos(this.x, this.y + 1.2f)
                         if (RockBottomAPI.getNet().isServer) {
                             RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + 1.2f))
-                            for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
                         }
+                        if (!game.isDedicatedServer)
+                            for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
+
                     }
                 }
                 this.kill()

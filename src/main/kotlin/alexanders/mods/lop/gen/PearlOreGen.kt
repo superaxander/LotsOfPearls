@@ -12,7 +12,7 @@ class PearlOreGen : WorldGenOre(), IWorldGenerator {
     override fun getOreMeta(): Int = 0
 
     override fun getHighestGridPos(): Int = -2
-    
+
     override fun getLowestGridPos(): Int = -3
 
     override fun getOreTile(): Tile = Tiles.pearlOre
@@ -23,7 +23,9 @@ class PearlOreGen : WorldGenOre(), IWorldGenerator {
 
     override fun getPriority(): Int = 210
 
-    fun register() {
-        RockBottomAPI.WORLD_GENERATORS.add(this)
+    companion object {
+        fun register() {
+            RockBottomAPI.WORLD_GENERATORS.add(PearlOreGen::class.java)
+        }
     }
 }

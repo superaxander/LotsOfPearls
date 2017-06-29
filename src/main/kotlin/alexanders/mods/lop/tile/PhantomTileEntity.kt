@@ -25,7 +25,7 @@ class PhantomTileEntity(world: IWorld, x: Int, y: Int) : TileEntity(world, x, y)
         super.update(game)
         if (RockBottomAPI.getNet().isServer || !RockBottomAPI.getNet().isConnectedToServer) {
             if (timeExisted++ >= 120)
-                world.getTile(x, y)?.doBreak(world, x, y, TileLayer.MAIN, game.player, false) // Should I use a fake player?
+                world.destroyTile(x, y,TileLayer.MAIN, null, false)
         }
     }
 }

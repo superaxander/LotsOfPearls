@@ -38,7 +38,8 @@ class PearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f 
 
     override fun update(game: IGameInstance) {
         super.update(game)
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
+        if (!game.isDedicatedServer)
+            game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (collidedVert || collidedHor) {
             val uuid = this.additionalData.getUniqueId("playerUUID")
             //println("$x , $y")
@@ -49,7 +50,8 @@ class PearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f 
                     if (RockBottomAPI.getNet().isServer) {
                         RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + 1.2f))
                     }
-                    for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
+                    if (!game.isDedicatedServer)
+                        for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
 
                 }
             }

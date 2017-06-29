@@ -7,7 +7,6 @@ import alexanders.mods.lop.init.*
 import alexanders.mods.lop.render.ConfigGUI
 import de.ellpeck.rockbottom.api.IApiHandler
 import de.ellpeck.rockbottom.api.IGameInstance
-import de.ellpeck.rockbottom.api.assets.IAssetManager
 import de.ellpeck.rockbottom.api.event.IEventHandler
 import de.ellpeck.rockbottom.api.event.impl.EntityTickEvent
 import de.ellpeck.rockbottom.api.gui.Gui
@@ -26,7 +25,7 @@ class LOP() : IMod {
 
     val configManager = ConfigurationManager()
 
-    override fun getVersion() = "0.7"
+    override fun getVersion() = "0.8"
 
     override fun getId() = "lop"
 
@@ -40,13 +39,14 @@ class LOP() : IMod {
         return ConfigGUI::class.java
     }
 
-    override fun init(game: IGameInstance, assetManager: IAssetManager, apiHandler: IApiHandler, eventHandler: IEventHandler) {
+    override fun init(game: IGameInstance, apiHandler: IApiHandler, eventHandler: IEventHandler) {
         Resources.init()
-        
+
         val itemUsageListener = ItemUsageListener()
         // Register event handlers
         eventHandler.registerListener(EntityTickEvent::class.java, itemUsageListener)
-        game.container.input.addMouseListener(itemUsageListener)
+        if (!game.isDedicatedServer)
+            game.container.input.addMouseListener(itemUsageListener)
 
         // Register network packets
         Packets.init()
@@ -59,10 +59,10 @@ class LOP() : IMod {
 
         // Register entities
         Entities.init()
-        
-        PearlOreGen().register()
-        SlimePoolGen().register()
-        
+
+        PearlOreGen.register()
+        SlimePoolGen.register()
+
         Recipes.init()
     }
 }

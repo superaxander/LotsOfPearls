@@ -1,8 +1,8 @@
 package alexanders.mods.lop.item
 
+import alexanders.mods.lop.entity.SpikyPearlEntity
 import alexanders.mods.lop.init.Resources.SPIKY_PEARL_DESC_RESOURCE
 import alexanders.mods.lop.init.Resources.SPIKY_PEARL_RESOURCE
-import alexanders.mods.lop.entity.SpikyPearlEntity
 import alexanders.mods.lop.net.CooldownUpdatePacket
 import alexanders.mods.lop.render.PearlItemRenderer
 import de.ellpeck.rockbottom.api.assets.IAssetManager

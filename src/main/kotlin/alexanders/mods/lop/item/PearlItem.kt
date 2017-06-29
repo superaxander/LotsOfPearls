@@ -1,8 +1,8 @@
 package alexanders.mods.lop.item
 
+import alexanders.mods.lop.entity.PearlEntity
 import alexanders.mods.lop.init.Resources.PEARL_DESC_RESOURCE
 import alexanders.mods.lop.init.Resources.PEARL_RESOURCE
-import alexanders.mods.lop.entity.PearlEntity
 import alexanders.mods.lop.net.CooldownUpdatePacket
 import alexanders.mods.lop.render.PearlItemRenderer
 import de.ellpeck.rockbottom.api.assets.IAssetManager

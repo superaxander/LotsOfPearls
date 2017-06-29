@@ -45,7 +45,8 @@ class BridgingPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
         val recoveryX = motionX
         val recoveryY = motionY
         super.update(game)
-        game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
+        if (!game.isDedicatedServer)
+            game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (collidedVert || collidedHor) {
             val tile = world.getTile(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt())
             if (tile is PhantomTile) {
@@ -63,7 +64,7 @@ class BridgingPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
         if (uuid != null) {
             val player = world.getEntity(uuid)
             if (player is AbstractEntityPlayer && (RockBottomAPI.getNet().isServer || !RockBottomAPI.getNet().isActive)) {
-                placePhantomTile(player)
+                placePhantomTile()
                 this.additionalData.addInt("tilesPlaced", tilesPlaced + 1)
             }
         }
@@ -72,10 +73,10 @@ class BridgingPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
 
     }
 
-    private fun placePhantomTile(player: AbstractEntityPlayer) {
-        println("Placing at $x, $y");
+    private fun placePhantomTile() {
+        //println("Placing at $x, $y");
         val tile = world.getTile(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt())
-        println(tile.isAir)
+        //println(tile.isAir)
         if (tile.isAir)
             world.setTile(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt(), phantomTile)
         //tile.doPlace(world, Math.round(x).toInt(), Math.round(y).toInt(), TileLayer.MAIN, ItemInstance(LOP.instance.phantomTile), player)

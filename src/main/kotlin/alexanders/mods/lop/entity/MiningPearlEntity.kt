@@ -67,9 +67,9 @@ class MiningPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
         var out = false
         for (i in -1..1) {
             for (z in -1..1) {
-                val tile = world.getTile(TileLayer.MAIN, Math.round(x).toInt() + i, Math.round(y).toInt() + z)
+                val tile = world.getState(TileLayer.MAIN, Math.round(x).toInt() + i, Math.round(y).toInt() + z).tile
                 if (!tile.isAir) {
-                    tile.doBreak(world, Math.round(x).toInt() + i, Math.round(y).toInt() + z, TileLayer.MAIN, player, true)
+                    tile.doBreak(world, Math.round(x).toInt() + i, Math.round(y).toInt() + z, TileLayer.MAIN, player, true, true)
                     out = true
                 }
             }

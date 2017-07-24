@@ -7,6 +7,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer
 import de.ellpeck.rockbottom.api.event.EventResult
 import de.ellpeck.rockbottom.api.event.IEventListener
 import de.ellpeck.rockbottom.api.event.impl.EntityTickEvent
+import org.lwjgl.opengl.Display
 import org.newdawn.slick.Input
 import org.newdawn.slick.MouseListener
 import org.newdawn.slick.geom.Vector2f
@@ -53,9 +54,9 @@ class ItemUsageListener : MouseListener, IEventListener<EntityTickEvent> {
             if (player.inv[player.selectedSlot] != null) {
 
                 if (net.isClient) {
-                    net.sendToServer(ItemUsePacket(angle(x, y), player.uniqueId, game.container.input.isKeyDown(Input.KEY_LSHIFT)))
+                    net.sendToServer(ItemUsePacket(angle(x, y), player.uniqueId, game.input.isKeyDown(Input.KEY_LSHIFT)))
                 } else {
-                    ItemUsePacket(angle(x, y), player.uniqueId, game.container.input.isKeyDown(Input.KEY_LSHIFT)).handle(game, null)
+                    ItemUsePacket(angle(x, y), player.uniqueId, game.input.isKeyDown(Input.KEY_LSHIFT)).handle(game, null)
                 }
             }
             //}
@@ -78,8 +79,9 @@ class ItemUsageListener : MouseListener, IEventListener<EntityTickEvent> {
     }
 
     private fun angle(mouseX: Int, mouseY: Int): Vector2f {
-        val game = RockBottomAPI.getGame().container
-        val radians = Math.atan2(mouseY - (game.height / 2.0), mouseX - (game.width / 2.0))
+        val w = Display.getWidth()
+        val h = Display.getHeight()
+        val radians = Math.atan2(mouseY - (h / 2.0), mouseX - (w / 2.0))
         return Vector2f(Math.cos(radians).toFloat(), Math.sin(radians).toFloat())
     }
 }

@@ -35,9 +35,7 @@ class LOP() : IMod {
 
     override fun getDescription(): String = "Adds a bunch of pearls. What else did you expect?"
 
-    override fun getModGuiClass(): Class<out Gui> {
-        return ConfigGUI::class.java
-    }
+    override fun getModGuiClass() = ConfigGUI::class.java
 
     override fun init(game: IGameInstance, apiHandler: IApiHandler, eventHandler: IEventHandler) {
         Resources.init()
@@ -46,7 +44,7 @@ class LOP() : IMod {
         // Register event handlers
         eventHandler.registerListener(EntityTickEvent::class.java, itemUsageListener)
         if (!game.isDedicatedServer)
-            game.container.input.addMouseListener(itemUsageListener)
+            game.input.addMouseListener(itemUsageListener)
 
         // Register network packets
         Packets.init()

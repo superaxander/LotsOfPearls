@@ -6,6 +6,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.item.ToolType
 import de.ellpeck.rockbottom.api.tile.Tile
 import de.ellpeck.rockbottom.api.tile.TileBasic
+import de.ellpeck.rockbottom.api.tile.entity.TileEntity
 import de.ellpeck.rockbottom.api.world.IWorld
 import de.ellpeck.rockbottom.api.world.TileLayer
 
@@ -23,4 +24,14 @@ class SlimeTile : TileBasic(Resources.SLIME_RESOURCE) {
     override fun register(): Tile {
         return super.register()
     }
+
+    override fun canProvideTileEntity(): Boolean {
+        return true
+    }
+
+    override fun provideTileEntity(world: IWorld, x: Int, y: Int): TileEntity {
+        return SlimeTileEntity(world, x, y)
+    }
+    
+    
 }

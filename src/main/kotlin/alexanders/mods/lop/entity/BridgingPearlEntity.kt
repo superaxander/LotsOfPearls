@@ -18,7 +18,7 @@ import java.util.*
 
 
 class BridgingPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(pearlItem)) {
-
+    
     init {
         if (this.additionalData == null) {
             this.additionalData = DataSet()
@@ -48,7 +48,7 @@ class BridgingPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
         if (!game.isDedicatedServer)
             game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (collidedVert || collidedHor) {
-            val tile = world.getTile(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt())
+            val tile = world.getState(Math.round(x).toInt(), Math.round(y).toInt()).tile //TileLayer.MAIN, )
             if (tile is PhantomTile) {
                 collidedHor = false
                 collidedVert = false
@@ -75,10 +75,10 @@ class BridgingPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
 
     private fun placePhantomTile() {
         //println("Placing at $x, $y");
-        val tile = world.getTile(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt())
+        val tile = world.getState(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt()).tile
         //println(tile.isAir)
         if (tile.isAir)
-            world.setTile(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt(), phantomTile)
+            world.setState(TileLayer.MAIN, Math.round(x).toInt(), Math.round(y).toInt(), phantomTile.defState)
         //tile.doPlace(world, Math.round(x).toInt(), Math.round(y).toInt(), TileLayer.MAIN, ItemInstance(LOP.instance.phantomTile), player)
     }
 

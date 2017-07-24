@@ -23,7 +23,7 @@ class SlimePoolGen : IWorldGenerator {
 
     fun generateAt(world: IWorld, chunk: IChunk, x: Int, y: Int, rand: Random) {
         //println("generating at $x, $y")
-        val tile = world.getTile(x, y - 1)
+        val tile = world.getState(x, y - 1).tile
         //println(tile.name)
         if (tile.name == RockBottomAPI.createInternalRes("dirt") || tile.name == RockBottomAPI.createInternalRes("grass")) {
             val poolBlobs = rand.nextInt(6) + 1
@@ -44,7 +44,7 @@ class SlimePoolGen : IWorldGenerator {
 
     private fun IChunkOrWorld.setTileSafe(layer: TileLayer, x: Int, y: Int, tile: Tile) {
         try {
-            this.setTile(layer, x, y, tile)
+            this.setState(layer, x, y, tile.defState)
         } catch (ignored: IndexOutOfBoundsException) {
         }
     }

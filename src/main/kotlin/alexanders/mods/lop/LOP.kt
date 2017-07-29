@@ -13,7 +13,7 @@ import de.ellpeck.rockbottom.api.gui.Gui
 import de.ellpeck.rockbottom.api.mod.IMod
 
 
-class LOP() : IMod {
+class LOP: IMod {
 
     companion object {
         lateinit var instance: LOP
@@ -25,7 +25,7 @@ class LOP() : IMod {
 
     val configManager = ConfigurationManager()
 
-    override fun getVersion() = "0.8"
+    override fun getVersion() = "0.10"
 
     override fun getId() = "lop"
 

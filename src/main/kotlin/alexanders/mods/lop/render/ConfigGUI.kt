@@ -7,6 +7,7 @@ import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.assets.IAssetManager
 import de.ellpeck.rockbottom.api.gui.Gui
 import de.ellpeck.rockbottom.api.gui.component.ComponentButton
+import de.ellpeck.rockbottom.api.util.reg.IResourceName
 import org.newdawn.slick.Graphics
 import java.util.*
 
@@ -162,4 +163,6 @@ class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
     override fun onClosed(game: IGameInstance?) {
         configuration.save()
     }
+
+    override fun getName(): IResourceName = RockBottomAPI.createRes(LOP.instance, "mod_config")
 }

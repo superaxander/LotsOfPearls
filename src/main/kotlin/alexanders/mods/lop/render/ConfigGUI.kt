@@ -50,25 +50,6 @@ class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
         downButton = ComponentButton(this, -3, guiLeft + 374, guiTop + 93, 10, 10, "")
         backButton = ComponentButton(this, -1, guiLeft + 92, guiTop + 120, 190, 16, assetManager.localize(RockBottomAPI.createRes(RockBottomAPI.getModLoader().getMod("rockbottom"), "button.back")))
         updateComponentList()
-
-        /*
-        buttonList.clear()
-        var row = 0
-        var even = true // yes I know 0 isn't even!
-
-        for ((key, value) in configuration.properties) {//TODO: do height bounds checking and add a scrollbar
-            buttonList.add(currentID, key as String)
-            val buttonText = assetManager.localize(RockBottomAPI.createRes(LOP.instance, "button.$key")) + ": $value"
-            if (even)
-                components.add(ComponentButton(this, currentID, guiLeft, guiTop + 30 * row, 190, 16, buttonText))
-            else {
-                components.add(ComponentButton(this, currentID, guiLeft + 194, guiTop + 30 * row, 190, 16, buttonText))
-                row++
-            }
-            currentID++
-            even = !even
-        }*/
-
     }
 
     fun updateComponentList() {

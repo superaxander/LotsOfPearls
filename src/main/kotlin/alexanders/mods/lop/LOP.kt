@@ -9,11 +9,10 @@ import de.ellpeck.rockbottom.api.IApiHandler
 import de.ellpeck.rockbottom.api.IGameInstance
 import de.ellpeck.rockbottom.api.event.IEventHandler
 import de.ellpeck.rockbottom.api.event.impl.EntityTickEvent
-import de.ellpeck.rockbottom.api.gui.Gui
 import de.ellpeck.rockbottom.api.mod.IMod
 
 
-class LOP: IMod {
+class LOP : IMod {
 
     companion object {
         lateinit var instance: LOP

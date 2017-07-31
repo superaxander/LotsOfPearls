@@ -13,7 +13,6 @@ import java.util.*
 
 class SlimePoolGen : IWorldGenerator {
     override fun generate(world: IWorld, chunk: IChunk, rand: Random) {
-        //println("generating in chunk: ${chunk.gridX}, ${chunk.gridY}")
         val randX = chunk.x + 8 + rand.nextInt(16)
         val randY = world.getLowestAirUpwards(TileLayer.MAIN, randX, 0)
         if (randY in 1..15) {
@@ -22,12 +21,9 @@ class SlimePoolGen : IWorldGenerator {
     }
 
     fun generateAt(world: IWorld, chunk: IChunk, x: Int, y: Int, rand: Random) {
-        //println("generating at $x, $y")
         val tile = world.getState(x, y - 1).tile
-        //println(tile.name)
         if (tile.name == RockBottomAPI.createInternalRes("dirt") || tile.name == RockBottomAPI.createInternalRes("grass")) {
             val poolBlobs = rand.nextInt(6) + 1
-            println(poolBlobs)
             for (b in 0..poolBlobs) this.makePool(chunk, x, y - 3, rand)
         }
     }
@@ -42,7 +38,7 @@ class SlimePoolGen : IWorldGenerator {
             }
     }
 
-    private fun IChunkOrWorld.setTileSafe(layer: TileLayer, x: Int, y: Int, tile: Tile) {
+    private fun IChunkOrWorld.setTileSafe(layer: TileLayer, x: Int, y: Int, tile: Tile) { //TODO: This makes no sense
         try {
             this.setState(layer, x, y, tile.defState)
         } catch (ignored: IndexOutOfBoundsException) {

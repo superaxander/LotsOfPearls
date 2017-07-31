@@ -2,52 +2,51 @@ package alexanders.mods.lop.init
 
 import alexanders.mods.lop.LOP
 import alexanders.mods.lop.item.*
-import de.ellpeck.rockbottom.api.RockBottomAPI
 
 
 object Items {
-    lateinit var pearlItem: alexanders.mods.lop.item.PearlItem
-    lateinit var bouncyPearlItem: alexanders.mods.lop.item.BouncyPearlItem
-    lateinit var rideablePearlItem: alexanders.mods.lop.item.RideablePearlItem
-    lateinit var miningPearlItem: alexanders.mods.lop.item.MiningPearlItem
-    lateinit var spikyPearlItem: alexanders.mods.lop.item.SpikyPearlItem
-    lateinit var spawnPearlItem: alexanders.mods.lop.item.SpawnPearlItem
-    lateinit var waypointPearlItem: alexanders.mods.lop.item.WaypointPearlItem
-    lateinit var bridgingPearlItem: alexanders.mods.lop.item.BridgingPearlItem
+    lateinit var pearlItem: PearlItem
+    lateinit var bouncyPearlItem: BouncyPearlItem
+    lateinit var rideablePearlItem: RideablePearlItem
+    lateinit var miningPearlItem: MiningPearlItem
+    lateinit var spikyPearlItem: SpikyPearlItem
+    lateinit var spawnPearlItem: SpawnPearlItem
+    lateinit var waypointPearlItem: WaypointPearlItem
+    lateinit var bridgingPearlItem: BridgingPearlItem
 
     fun init() {
         val lop = LOP.instance
         if (lop.configManager.isEnabled("pearl")) {
-            Items.pearlItem = PearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.PEARL_RESOURCE, Items.pearlItem)
+            pearlItem = PearlItem()
+            pearlItem.register().addResource("pearl")
         }
         if (lop.configManager.isEnabled("bouncy")) {
-            Items.bouncyPearlItem = BouncyPearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.BOUNCY_PEARL_RESOURCE, Items.bouncyPearlItem)
+            bouncyPearlItem = BouncyPearlItem()
+            bouncyPearlItem.register()
         }
         if (lop.configManager.isEnabled("rideable")) {
-            Items.rideablePearlItem = RideablePearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.RIDEABLE_PEARL_RESOURCE, Items.rideablePearlItem)
+            rideablePearlItem = RideablePearlItem()
+            rideablePearlItem.register()
         }
         if (lop.configManager.isEnabled("mining")) {
-            Items.miningPearlItem = MiningPearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.MINING_PEARL_RESOURCE, Items.miningPearlItem)
+            miningPearlItem = MiningPearlItem()
+            miningPearlItem.register()
         }
         if (lop.configManager.isEnabled("spiky")) {
-            Items.spikyPearlItem = SpikyPearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.SPIKY_PEARL_RESOURCE, Items.spikyPearlItem)
+            spikyPearlItem = SpikyPearlItem()
+            spikyPearlItem.register()
         }
         if (lop.configManager.isEnabled("spawn")) {
-            Items.spawnPearlItem = SpawnPearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.SPAWN_PEARL_RESOURCE, Items.spawnPearlItem)
+            spawnPearlItem = SpawnPearlItem()
+            spawnPearlItem.register()
         }
         if (lop.configManager.isEnabled("waypoint")) {
-            Items.waypointPearlItem = WaypointPearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.WAYPOINT_PEARL_RESOURCE, Items.waypointPearlItem)
+            waypointPearlItem = WaypointPearlItem()
+            waypointPearlItem.register()
         }
         if (lop.configManager.isEnabled("bridging")) {
-            Items.bridgingPearlItem = BridgingPearlItem()
-            RockBottomAPI.ITEM_REGISTRY.register(Resources.BRIDGING_PEARL_RESOURCE, Items.bridgingPearlItem)
+            bridgingPearlItem = BridgingPearlItem()
+            bridgingPearlItem.register()
         }
     }
 }

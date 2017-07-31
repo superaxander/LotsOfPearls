@@ -18,7 +18,7 @@ import java.util.*
 
 
 class BridgingPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vector2f = Vector2f()) : EntityItem(world, ItemInstance(pearlItem)) {
-    
+
     init {
         if (this.additionalData == null) {
             this.additionalData = DataSet()

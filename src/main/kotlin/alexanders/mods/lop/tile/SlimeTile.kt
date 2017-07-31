@@ -32,6 +32,6 @@ class SlimeTile : TileBasic(Resources.SLIME_RESOURCE) {
     override fun provideTileEntity(world: IWorld, x: Int, y: Int): TileEntity {
         return SlimeTileEntity(world, x, y)
     }
-    
-    
+
+
 }

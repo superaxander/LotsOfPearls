@@ -2,7 +2,6 @@ package alexanders.mods.lop.gen
 
 import alexanders.mods.lop.init.Tiles
 import de.ellpeck.rockbottom.api.RockBottomAPI
-import de.ellpeck.rockbottom.api.tile.Tile
 import de.ellpeck.rockbottom.api.tile.state.TileState
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator
 import de.ellpeck.rockbottom.api.world.gen.WorldGenOre

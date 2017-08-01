@@ -24,7 +24,7 @@ class LOP : IMod {
 
     val configManager = ConfigurationManager()
 
-    override fun getVersion() = "0.11"
+    override fun getVersion() = "0.12"
 
     override fun getId() = "lop"
 

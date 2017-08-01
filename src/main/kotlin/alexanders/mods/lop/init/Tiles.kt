@@ -18,7 +18,7 @@ object Tiles {
         }
         if (lop.configManager.isEnabled("slime")) {
             alexanders.mods.lop.init.Tiles.slime = alexanders.mods.lop.tile.SlimeTile()
-            alexanders.mods.lop.init.Tiles.slime.register()
+            alexanders.mods.lop.init.Tiles.slime.register().addResource("slime")
         }
     }
 }

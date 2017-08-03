@@ -6,7 +6,6 @@ import de.ellpeck.rockbottom.api.GameContent
 import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.construction.BasicRecipe
 import de.ellpeck.rockbottom.api.construction.resource.ResInfo
-import de.ellpeck.rockbottom.api.construction.resource.ResourceRegistry
 import de.ellpeck.rockbottom.api.construction.resource.ResourceRegistry.*
 import de.ellpeck.rockbottom.api.item.ItemInstance
 
@@ -24,7 +23,7 @@ object Recipes {
             }
             if (LOP.instance.configManager.isEnabled("mining")) {
                 val pickaxeRock = "pickaxe_rock"
-                addResources(pickaxeRock, ResInfo(GameContent.ITEM_ROCK_PICK))
+                addResources(pickaxeRock, ResInfo(GameContent.ITEM_STONE_PICKAXE))
                 addRecipe(BasicRecipe(ItemInstance(Items.miningPearlItem), 1 of pearl, 2 of pickaxeRock))
             }
             if (LOP.instance.configManager.isEnabled("bridging")) {

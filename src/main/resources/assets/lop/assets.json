@@ -1,0 +1,31 @@
+{
+  "loc": {
+    "us_english": "/loc/us_english.json"
+  },
+  "tex": {
+    "button": {
+      "down": "/gui/down_button.png",
+      "up": "/gui/up_button.png"
+    },
+    "cooldown": "/item/cooldown.png",
+    "items": {
+      "bouncy_pearl": "/item/bouncy_pearl.png",
+      "bridging_pearl": "/item/bridging_pearl.png",
+      "mining_pearl": "/item/mining_pearl.png",
+      "pearl": "/item/pearl.png",
+      "rideable_pearl": "/item/rideable_pearl.png",
+      "spawn_pearl": "/item/spawn_pearl.png",
+      "spiky_pearl": "/item/spiky_pearl.png",
+      "waypoint_pearl": "/item/waypoint_pearl.png"
+    },
+    "particles": {
+      "blood": "/particle/blood.png",
+      "teleportation": "/particle/teleportation.png"
+    },
+    "tiles": {
+      "pearl_ore": "/tile/pearl_ore.png",
+      "phantom": "/tile/phantom.png",
+      "slime": "/tile/slime.png"
+    }
+  }
+}

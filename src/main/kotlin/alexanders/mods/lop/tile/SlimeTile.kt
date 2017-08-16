@@ -24,7 +24,7 @@ class SlimeTile : TileBasic(Resources.SLIME_RESOURCE) {
         if (lastTimeBounced + 100 < now) {
             if (entity.motionY < 0) {
                 entity.motionY = -entity.motionY
-                entity.fallAmount = 0
+                entity.isFalling = false
 
                 entity.applyMotion()
             }

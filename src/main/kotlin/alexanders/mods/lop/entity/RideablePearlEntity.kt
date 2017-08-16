@@ -43,7 +43,7 @@ class RideablePearlEntity(world: IWorld, player: UUID? = null, mouseDirection: V
             game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
         if (uuid != null) {
             world.getEntity(uuid)?.setPos(x, y + .8f)
-            world.getEntity(uuid)?.fallAmount = 0
+            world.getEntity(uuid)?.isFalling = false
             if (RockBottomAPI.getNet().isServer) {
                 RockBottomAPI.getNet().sendToAllPlayers(world, EntityPositionUpdatePacket(uuid, x, y + .8f, true))
             }

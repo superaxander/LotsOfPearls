@@ -1,0 +1,40 @@
+{
+  "lop": {
+    "button": {
+      "bouncy": "Bouncy Teleportation Pearl",
+      "bridging": "Bridging Pearl",
+      "mining": "Mining Pearl",
+      "ore": "Pearl Ore",
+      "pearl": "Teleportation Pearl",
+      "rideable": "Rideable Pearl",
+      "slime": "Slime",
+      "spawn": "Spawn Pearl",
+      "spiky": "Spiky Pearl",
+      "waypoint": "Waypoint Pearl"
+    },
+    "desc": {
+      "bouncy_pearl": "A teleporation pearl that bounces. What else did you expect?",
+      "bridging_peal": "A pearl that makes bridges. What else did you expect?",
+      "mining_pearl": "A pearl that mines. What else did you expect?",
+      "more_info": "Hold shift for more information",
+      "pearl": "A pearl that teleports you. What else did you expect?",
+      "rideable_pearl": "A rideable teleportation pearl. What else did you expect?",
+      "set_to": "Waypoint set to: ",
+      "spawn_pearl": "A pearl that teleports you to spawn. What else did you expect?",
+      "spiky_pearl": "A pearl that hurts others. What else did you expect?",
+      "waypoint_pearl": "A pearl that teleports you to a waypoint. What else did you expect?",
+      "waypoint_pearl_usage": "Right-click to teleport, shift-right-click to set the waypoint to your current location"
+    },
+    "item": {
+      "bouncy_pearl": "Bouncy Teleportation Pearl",
+      "bridging_pearl": "Bridging Pearl",
+      "mining_pearl": "Mining Pearl",
+      "pearl": "Teleportation Pearl",
+      "rideable_pearl": "Rideable Teleportation Pearl",
+      "slime": "Slime",
+      "spawn_pearl": "Spawn Pearl",
+      "spiky_pearl": "Spiky Pearl",
+      "waypoint_pearl": "Waypoint Pearl"
+    }
+  }
+}

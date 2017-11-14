@@ -7,7 +7,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.item.ToolType
 import de.ellpeck.rockbottom.api.tile.TileBasic
 import de.ellpeck.rockbottom.api.world.IWorld
-import de.ellpeck.rockbottom.api.world.TileLayer
+import de.ellpeck.rockbottom.api.world.layer.TileLayer
 
 
 class PearlOreTile : TileBasic(Resources.PEARL_ORE_RESOURCE) {

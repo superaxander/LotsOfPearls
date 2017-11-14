@@ -11,7 +11,7 @@ import de.ellpeck.rockbottom.api.item.ItemInstance
 
 
 object Recipes {
-    fun init() {
+    fun init() { /*
         if (LOP.instance.configManager.isEnabled("pearl")) {
             val pearl = "pearl"
             if (LOP.instance.configManager.isEnabled("spiky")) {
@@ -42,11 +42,11 @@ object Recipes {
             }
 
 
-        }
+        }*/
         //addRecipe(BasicRecipe(ItemInstance(Items.bouncyPearlItem), ItemInstance(Items.pearlItem), ItemInstance(RockBottomAPI.ITEM_REGISTRY[RockBottomAPI.createInternalRes("rock")], 4)))
     }
 
-    private fun addRecipe(recipe: BasicRecipe) {
-        RockBottomAPI.MANUAL_CONSTRUCTION_RECIPES.add(recipe)
-    }
+    //private fun addRecipe(recipe: BasicRecipe) {
+        //RockBottomAPI.MANUAL_CONSTRUCTION_RECIPES.register(recipe)
+    //}
 }

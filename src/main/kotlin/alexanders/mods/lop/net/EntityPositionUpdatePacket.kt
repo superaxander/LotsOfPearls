@@ -20,14 +20,13 @@ class EntityPositionUpdatePacket(var uuid: UUID?, var x: Double, var y: Double, 
     }
 
     override fun handle(game: IGameInstance, channelHandlerContext: ChannelHandlerContext) {
-        game.scheduleAction {
+        game.enqueueAction({ gameInstance, _ ->
             if (uuid != null) {
-                game.world.getEntity(uuid).setPos(x, y)
+                gameInstance.world.getEntity(uuid).setPos(x, y)
                 if (!disableParticles)
                     for (i in 0..20) game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, maxLife = 60))
             }
-            return@scheduleAction true
-        }
+        }, null)
     }
 
     override fun fromBuffer(buffer: ByteBuf) {

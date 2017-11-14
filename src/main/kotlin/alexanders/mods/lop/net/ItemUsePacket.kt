@@ -24,15 +24,14 @@ class ItemUsePacket(private var mouseDirection: Vector2f?, private var uuid: UUI
     override fun handle(game: IGameInstance, channelHandlerContext: ChannelHandlerContext?) {
         // Always ran on server:
         //println(uuid.toString())
-        game.scheduleAction {
-            val p = game.world.getEntity(uuid) as AbstractEntityPlayer
+        game.enqueueAction( { gameInstance, _ ->
+            val p = gameInstance.world.getEntity(uuid) as AbstractEntityPlayer
             val itemInstance = p.inv[p.selectedSlot]
             val itemType = itemInstance.item
             if (itemType is Useable && mouseDirection != null) {
                 itemType.use(itemInstance, mouseDirection as Vector2f, p, shiftPressed)
             }
-            return@scheduleAction true
-        }
+        }, null)
     }
 
     override fun fromBuffer(buffer: ByteBuf) {

@@ -42,7 +42,7 @@ class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
         applyMotion()
         if (!game.isDedicatedServer)
             game.particleManager.addParticle(TeleportationParticle(world = game.world, x = x, y = y, motionX = motionX / 2 * PearlParticle.randomSignedDouble(), maxLife = 10))
-        move(motionX, motionY)
+        move()
         if (collidedVert || collidedHor) {
             if (this.additionalData.getInt("bounces") >= 3) {
                 val uuid = this.additionalData.getUniqueId("playerUUID")
@@ -72,7 +72,5 @@ class BouncyPearlEntity(world: IWorld, player: UUID? = null, mouseDirection: Vec
         }
     }
 
-    override fun canPickUp(): Boolean {
-        return false
-    }
+    override fun canPickUp() = false
 }

@@ -3,52 +3,67 @@ package alexanders.mods.lop.render
 import alexanders.mods.lop.LOP
 import alexanders.mods.lop.init.Resources
 import de.ellpeck.rockbottom.api.IGameInstance
+import de.ellpeck.rockbottom.api.IGraphics
 import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.assets.IAssetManager
 import de.ellpeck.rockbottom.api.gui.Gui
 import de.ellpeck.rockbottom.api.gui.component.ComponentButton
 import de.ellpeck.rockbottom.api.util.reg.IResourceName
-import org.newdawn.slick.Graphics
 import java.util.*
+import java.util.function.Supplier
 
 
 class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
-
     var currentID = 0
     val configuration = LOP.instance.configManager
     val buttonList = ArrayList<String>(configuration.properties.size)
-    val rows = ArrayList<Array<ComponentButton>>()
+    val rows = ArrayList<Array<ToggleButton>>()
     var row = 0
     lateinit var upButton: ComponentButton
     lateinit var downButton: ComponentButton
     lateinit var backButton: ComponentButton
 
-    override fun initGui(game: IGameInstance) {
-        super.initGui(game)
+    override fun init(game: IGameInstance) {
+        super.init(game)
         rows.clear()
         buttonList.clear()
         currentID = 0
         val assetManager = game.assetManager
 
-        var currentRow = ArrayList<ComponentButton>(2)
+        var currentRow = ArrayList<ToggleButton>(2)
 
         for ((key, value) in configuration.properties) {
             if (currentRow.size >= 2) {
                 rows.add(currentRow.toTypedArray())
-                currentRow = ArrayList<ComponentButton>(2)
+                currentRow = ArrayList(2)
             }
             buttonList.add(key as String)
             val buttonText = assetManager.localize(RockBottomAPI.createRes(LOP.instance, "button.$key")) + ": $value"
             //println(currentRow.size)
             if (currentRow.size == 1) // Even?
-                currentRow.add(ComponentButton(this, currentID++, guiLeft, guiTop + 30 * rows.size, 180, 16, buttonText))
+                currentRow.add(ToggleButton(currentID++, this, 0, 30 * rows.size, 180, 16, buttonText))
             else
-                currentRow.add(ComponentButton(this, currentID++, guiLeft + 184, guiTop + 30 * rows.size, 180, 16, buttonText))
+                currentRow.add(ToggleButton(currentID++, this, 184, 30 * rows.size, 180, 16, buttonText))
         }
         rows.add(currentRow.toTypedArray())
-        upButton = ComponentButton(this, -2, guiLeft + 374, guiTop + 3, 10, 10, "")
-        downButton = ComponentButton(this, -3, guiLeft + 374, guiTop + 93, 10, 10, "")
-        backButton = ComponentButton(this, -1, guiLeft + 92, guiTop + 120, 190, 16, assetManager.localize(RockBottomAPI.createRes(RockBottomAPI.getModLoader().getMod("rockbottom"), "button.back")))
+        upButton = ComponentButton(this, 374, 3, 10, 10, Supplier {
+            game.enqueueAction({ _, _ ->
+                scrollUp()
+            }, null)
+            return@Supplier true
+        }, "")
+        downButton = ComponentButton(this, 374, 93, 10, 10, Supplier {
+            game.enqueueAction({ _, _ ->
+                scrollDown()
+            }, null)
+            return@Supplier true
+        }, "")
+        backButton = ComponentButton(this, 92, 120, 190, 16, Supplier {
+            game.enqueueAction({ gameInstance, _ ->
+                gameInstance.guiManager.openGui(parent)
+            }, null)
+            return@Supplier true
+        }, assetManager.localize(RockBottomAPI.createRes(RockBottomAPI.getModLoader().getMod("rockbottom"), "button.back")))
         updateComponentList()
     }
 
@@ -57,13 +72,10 @@ class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
         outer_loop@ for (i in row..row + 3) {
             for (j in 0..1) {
                 try {
-                    val c = rows[i][j]
-                    c.y = guiTop + 30 * (i - row)
-                    //System.out.println("y:"+c.y);
+                    val c = ToggleButton(rows[i][j], 30 * (i - row))
                     components.add(c)
                 } catch (ignored: IndexOutOfBoundsException) {
                     break@outer_loop
-                    //ignored.printStackTrace();
                 }
 
             }
@@ -74,10 +86,10 @@ class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
 
     }
 
-    override fun renderOverlay(game: IGameInstance, manager: IAssetManager, g: Graphics) {
+    override fun renderOverlay(game: IGameInstance, manager: IAssetManager, g: IGraphics) {
         super.renderOverlay(game, manager, g)
-        manager.getTexture(Resources.UP_ARROW).draw(upButton.x.toFloat(), upButton.y.toFloat(), upButton.sizeX.toFloat(), upButton.sizeY.toFloat())
-        manager.getTexture(Resources.DOWN_ARROW).draw(downButton.x.toFloat(), downButton.y.toFloat(), downButton.sizeX.toFloat(), downButton.sizeY.toFloat())
+        manager.getTexture(Resources.UP_ARROW).draw(upButton.x.toFloat(), upButton.y.toFloat(), 10f, 10f)
+        manager.getTexture(Resources.DOWN_ARROW).draw(downButton.x.toFloat(), downButton.y.toFloat(), 10f, 10f)
     }
 
     private fun scrollDown() {
@@ -93,52 +105,6 @@ class ConfigGUI(parent: Gui) : Gui(384, 136, parent) {
             row--
             updateComponentList()
         }
-    }
-
-
-    override fun onButtonActivated(game: IGameInstance, button: Int): Boolean {
-        val guiManager = game.guiManager
-        val assetManager = game.assetManager
-        //println(button)
-        when (button) {
-            -1 -> {
-                guiManager.openGui(parent)
-                return true
-            }
-            -2 -> {
-                game.scheduleAction {
-                    scrollUp()
-                    return@scheduleAction true
-                }
-            }
-            -3 -> {
-                game.scheduleAction {
-                    scrollDown()
-                    return@scheduleAction true
-                }
-            }
-            else -> {
-                if (button < buttonList.size && button >= 0) {
-                    val buttonKey = buttonList[button]
-                    val property = configuration.properties.getProperty(buttonKey)
-                    if (property is String) {
-                        var bool = property.toBoolean()
-                        bool = !bool
-                        configuration.properties.setProperty(buttonKey, bool.toString())
-                        rows.forEach {
-                            it.forEach {
-                                if (it.id == button) {
-                                    it.setText(assetManager.localize(RockBottomAPI.createRes(LOP.instance, "button.$buttonKey")) + ": " + bool)
-                                    return true
-                                }
-                            }
-                        }
-                        return true
-                    }
-                }
-            }
-        }
-        return false
     }
 
     override fun onClosed(game: IGameInstance?) {

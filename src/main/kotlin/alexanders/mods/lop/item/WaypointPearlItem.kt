@@ -16,7 +16,7 @@ import de.ellpeck.rockbottom.api.entity.player.AbstractEntityPlayer
 import de.ellpeck.rockbottom.api.item.ItemBasic
 import de.ellpeck.rockbottom.api.item.ItemInstance
 import de.ellpeck.rockbottom.api.render.item.IItemRenderer
-import de.ellpeck.rockbottom.api.world.TileLayer
+import de.ellpeck.rockbottom.api.world.layer.TileLayer
 import org.newdawn.slick.geom.Vector2f
 
 

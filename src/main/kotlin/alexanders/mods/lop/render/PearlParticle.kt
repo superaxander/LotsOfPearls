@@ -2,6 +2,7 @@ package alexanders.mods.lop.render
 
 import alexanders.mods.lop.init.Resources.BLOOD_PARTICLE_RESOURCE
 import de.ellpeck.rockbottom.api.IGameInstance
+import de.ellpeck.rockbottom.api.IGraphics
 import de.ellpeck.rockbottom.api.assets.IAssetManager
 import de.ellpeck.rockbottom.api.particle.Particle
 import de.ellpeck.rockbottom.api.util.Util
@@ -18,7 +19,7 @@ open class PearlParticle(val name: IResourceName, world: IWorld, x: Double, y: D
 
     constructor(world: IWorld) : this(BLOOD_PARTICLE_RESOURCE, world = world, x = .0, y = .0, maxLife = 0) // Is this needed
 
-    override fun render(game: IGameInstance, manager: IAssetManager, g: Graphics, x: Float, y: Float, filter: Color) {
+    override fun render(game: IGameInstance, manager: IAssetManager, g: IGraphics, x: Float, y: Float, filter: Int) {
         super.render(game, manager, g, x, y, filter)
         manager.getTexture(name).draw(x, y, .25f, .25f, filter)
     }

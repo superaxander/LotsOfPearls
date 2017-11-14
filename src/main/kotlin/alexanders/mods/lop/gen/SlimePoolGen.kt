@@ -1,18 +1,23 @@
 package alexanders.mods.lop.gen
 
+import alexanders.mods.lop.LOP
 import alexanders.mods.lop.init.Tiles
 import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.tile.Tile
+import de.ellpeck.rockbottom.api.util.Util
 import de.ellpeck.rockbottom.api.world.IChunk
 import de.ellpeck.rockbottom.api.world.IChunkOrWorld
 import de.ellpeck.rockbottom.api.world.IWorld
-import de.ellpeck.rockbottom.api.world.TileLayer
+import de.ellpeck.rockbottom.api.world.layer.TileLayer
 import de.ellpeck.rockbottom.api.world.gen.IWorldGenerator
 import java.util.*
 
 
 class SlimePoolGen : IWorldGenerator {
-    override fun generate(world: IWorld, chunk: IChunk, rand: Random) {
+    private val rand = Random()
+    
+    override fun generate(world: IWorld, chunk: IChunk) {
+        rand.setSeed(Util.scrambleSeed(chunk.x, chunk.y, world.seed))
         val randX = chunk.x + 8 + rand.nextInt(16)
         val randY = world.getLowestAirUpwards(TileLayer.MAIN, randX, 0)
         if (randY in 1..15) {
@@ -20,7 +25,7 @@ class SlimePoolGen : IWorldGenerator {
         }
     }
 
-    fun generateAt(world: IWorld, chunk: IChunk, x: Int, y: Int, rand: Random) {
+    private fun generateAt(world: IWorld, chunk: IChunk, x: Int, y: Int, rand: Random) {
         val tile = world.getState(x, y - 1).tile
         if (tile.name == RockBottomAPI.createInternalRes("dirt") || tile.name == RockBottomAPI.createInternalRes("grass")) {
             val poolBlobs = rand.nextInt(6) + 1
@@ -28,7 +33,7 @@ class SlimePoolGen : IWorldGenerator {
         }
     }
 
-    fun makePool(chunk: IChunk, x: Int, y: Int, rand: Random) {
+    private fun makePool(chunk: IChunk, x: Int, y: Int, rand: Random) {
         //println("making pool at $x, $y")
         for (w in -1..1)
             if (rand.nextBoolean()) {
@@ -45,13 +50,13 @@ class SlimePoolGen : IWorldGenerator {
         }
     }
 
-    override fun shouldGenerate(world: IWorld, chunk: IChunk, rand: Random) = chunk.gridY == 0
+    override fun shouldGenerate(world: IWorld, chunk: IChunk) = chunk.gridY == 0
 
     override fun getPriority(): Int = 400
 
     companion object {
         fun register() {
-            RockBottomAPI.WORLD_GENERATORS.add(SlimePoolGen::class.java)
+            RockBottomAPI.WORLD_GENERATORS.register(RockBottomAPI.createRes(LOP.instance, "slime_pool_gen"),SlimePoolGen::class.java)
         }
     }
 }

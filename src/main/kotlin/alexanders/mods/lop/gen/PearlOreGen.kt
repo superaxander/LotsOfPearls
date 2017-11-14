@@ -1,5 +1,6 @@
 package alexanders.mods.lop.gen
 
+import alexanders.mods.lop.LOP
 import alexanders.mods.lop.init.Tiles
 import de.ellpeck.rockbottom.api.RockBottomAPI
 import de.ellpeck.rockbottom.api.tile.state.TileState
@@ -23,7 +24,7 @@ class PearlOreGen : WorldGenOre(), IWorldGenerator {
 
     companion object {
         fun register() {
-            RockBottomAPI.WORLD_GENERATORS.add(PearlOreGen::class.java)
+            RockBottomAPI.WORLD_GENERATORS.register(RockBottomAPI.createRes(LOP.instance, "pearl_ore_gen"),PearlOreGen::class.java)
         }
     }
 }

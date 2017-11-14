@@ -16,10 +16,9 @@ class BloodPacket(var x: Double, var y: Double) : IPacket {
     }
 
     override fun handle(game: IGameInstance, channelHandlerContext: ChannelHandlerContext) {
-        game.scheduleAction {
-            for (i in 0..20) game.particleManager.addParticle(BloodParticle(world = game.world, x = x, y = y, maxLife = 40))
-            return@scheduleAction true
-        }
+        game.enqueueAction({ gameInstance, _ ->
+            for (i in 0..20) gameInstance.particleManager.addParticle(BloodParticle(world = game.world, x = x, y = y, maxLife = 40))
+        }, null)
     }
 
     override fun fromBuffer(buffer: ByteBuf) {
